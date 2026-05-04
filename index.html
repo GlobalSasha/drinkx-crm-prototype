@@ -1582,6 +1582,7 @@
     <div class="nav head-only" data-go="team" style="display:none;"><span>👥</span>Команда</div>
     <div class="nav head-only" data-go="knowledge" style="display:none;"><span>📚</span>Knowledge</div>
     <div class="nav head-only" data-go="settings" style="display:none;"><span>⚙️</span>Настройки</div>
+    <div class="nav head-only" data-go="segments" style="display:none;"><span>🗺️</span>Сегменты</div>
 
     <div class="section-label">Воронки</div>
     <div class="pipe-link" data-go="pipeline">• Новые клиенты</div>
@@ -3681,6 +3682,20 @@
       </div>
     </section>
 
+    <!-- ============ SEGMENTS (head/admin) ============ -->
+    <section class="screen" id="screen-segments">
+      <div class="kb-top">
+        <div>
+          <h1>🗺️ Сегменты рынка</h1>
+          <div class="sub">DrinkX-стратегия по 6 сегментам · загружено из drinkx-client-map / segments/</div>
+        </div>
+      </div>
+
+      <div id="segments-content" class="settings-content" style="overflow-y:auto;">
+        <!-- Filled by JS from REAL_DATA.segments -->
+      </div>
+    </section>
+
     <!-- ============ KNOWLEDGE BASE (admin) ============ -->
     <section class="screen" id="screen-knowledge">
       <div class="kb-top">
@@ -4669,7 +4684,7 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
 
     // Sidebar active state
     document.querySelectorAll('.side .nav').forEach(n => n.classList.remove('active'));
-    const navMap = { 'today': 0, 'today-done': 0, 'today-empty': 0, 'pipeline': 1, 'pipeline-empty': 1, 'lead': 1, 'inbox-stub': 2, 'archive-stub': 3, 'team': 4, 'knowledge': 5, 'settings': 6 };
+    const navMap = { 'today': 0, 'today-done': 0, 'today-empty': 0, 'pipeline': 1, 'pipeline-empty': 1, 'lead': 1, 'inbox-stub': 2, 'archive-stub': 3, 'team': 4, 'knowledge': 5, 'settings': 6, 'segments': 7 };
     const navItems = document.querySelectorAll('.side .nav');
     if (navMap[screenId] !== undefined) navItems[navMap[screenId]]?.classList.add('active');
 
@@ -5388,6 +5403,9 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     // ========== TEAM ==========
     renderTeamFromRealData();
 
+    // ========== SEGMENTS ==========
+    renderSegmentsPage();
+
     // ========== Override showLead to use real data ==========
     const _showLead = window.showLead;
     window.showLead = function(key) {
@@ -5626,9 +5644,21 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
           </div>
         </div>` : ''}
 
+        ${(lead.industry_signals && lead.industry_signals.length) ? `<div class="ai-section">
+          <div class="h">🏭 Отраслевой слой (Industry enrichment v0.4)</div>
+          <ul>
+            ${lead.industry_signals.map(s => `<li>${escapeHtml(s.text || s)}${s.source ? ` <span class="src">${escapeHtml(s.source).slice(0, 60)}</span>` : ''}</li>`).join('')}
+          </ul>
+        </div>` : ''}
+
         ${dms.length ? `<div class="ai-section">
-          <div class="h">🎯 Контакты ЛПР</div>
+          <div class="h">🎯 Контакты ЛПР (LinkedIn / Decision Makers)</div>
           ${dms.map(p => `<p style="margin:6px 0;"><b>${escapeHtml(p.name || '')}</b> — <span style="color:var(--text-secondary);">${escapeHtml(p.title || p.role || '')}</span>${p.linkedin_url ? ` · <a style="color:var(--accent);" href="${p.linkedin_url}" target="_blank">LinkedIn</a>` : ''}${p.confidence ? ` · <span style="color:var(--text-tertiary);font-size:11px;">${p.confidence}</span>` : ''}</p>`).join('')}
+        </div>` : ''}
+
+        ${(lead.industry_people && lead.industry_people.length) ? `<div class="ai-section">
+          <div class="h">👥 Дополнительные ЛПР (отраслевой research)</div>
+          ${lead.industry_people.map(p => `<p style="margin:6px 0;"><b>${escapeHtml(p.name || '')}</b> — <span style="color:var(--text-secondary);">${escapeHtml(p.title || '')}</span>${p.role ? ` · ${escapeHtml(p.role)}` : ''}${p.confidence ? ` · <span style="color:var(--text-tertiary);font-size:11px;">${p.confidence}</span>` : ''}</p>`).join('')}
         </div>` : ''}
 
         ${lead.entry_route ? `<div class="ai-section">
@@ -5776,6 +5806,49 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
         ${planned.map(l => taskHtml(l, '25 мин', 'регулярка')).join('')}
       </section>` : ''}
     `;
+  }
+
+  // ========== SEGMENTS ==========
+  function renderSegmentsPage() {
+    const D = window.REAL_DATA;
+    if (!D.segments) return;
+    const container = document.getElementById('segments-content');
+    if (!container) return;
+
+    const segs = D.segments;
+    container.innerHTML = Object.entries(segs).map(([key, seg]) => {
+      const segLeads = D.leads.filter(l => l.segment === key);
+      const tier1 = segLeads.filter(l => l.tier === 'Tier 1');
+      const totalDeal = segLeads.filter(l => !l.stage.startsWith('Закрыто')).reduce((s, l) => s + l.deal_amount, 0);
+      const sectionsHtml = Object.entries(seg.sections || {}).map(([title, content]) => {
+        let html = escapeHtml(content)
+          .replace(/^- (.+)$/gm, '<li>$1</li>')
+          .replace(/(<li>.+<\/li>\n?)+/g, m => '<ul>' + m + '</ul>')
+          .replace(/\[\[[^|]+\|([^\]]+)\]\]/g, '<b>$1</b>')
+          .replace(/\n\n/g, '<br><br>');
+        return `<details style="margin-bottom:10px;"><summary style="cursor:pointer;font-size:13px;font-weight:500;padding:8px 0;">${escapeHtml(title)}</summary><div style="padding:8px 0 12px 16px;font-size:13px;line-height:1.6;color:var(--text-primary);">${html}</div></details>`;
+      }).join('');
+
+      return `<div style="background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;padding:22px 26px;margin-bottom:18px;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:14px;">
+          <div>
+            <h2 style="font-size:18px;font-weight:600;margin-bottom:4px;">${escapeHtml(seg.title)}</h2>
+            <div style="font-size:13px;color:var(--text-secondary);line-height:1.5;">${escapeHtml(seg.intro)}</div>
+          </div>
+          <div style="text-align:right;font-size:11px;color:var(--text-secondary);min-width:140px;">
+            <div><b style="font-size:18px;color:var(--text-primary);">${segLeads.length}</b> клиентов</div>
+            <div>${tier1.length} Tier 1 · ${fmtMoney(totalDeal)} pipe</div>
+          </div>
+        </div>
+        ${sectionsHtml}
+        <div style="margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-tertiary);margin-bottom:6px;font-weight:600;">Топ-5 в сегменте</div>
+          ${segLeads.sort((a,b) => (b.fit_score - a.fit_score) || (b.deal_amount - a.deal_amount)).slice(0, 5).map(l =>
+            `<a data-real-lead="${l.id}" style="display:inline-block;margin:3px 6px 3px 0;padding:4px 10px;background:var(--bg-tertiary);border-radius:6px;font-size:12px;color:var(--text-primary);cursor:pointer;border:1px solid var(--border);">${escapeHtml(l.company_name)} <span style="color:var(--accent);font-size:10px;">${l.fit_score}</span></a>`
+          ).join('')}
+        </div>
+      </div>`;
+    }).join('');
   }
 
   // ========== TEAM ==========

@@ -104,6 +104,75 @@ def load_linkedin_contacts():
     return by_client
 
 
+def load_industry_signals():
+    """industry_signals_v0.4.csv → grouped by client."""
+    p = BASE / "data" / "industry_signals_v0.4.csv"
+    by_client = defaultdict(list)
+    if not p.exists():
+        return by_client
+    with open(p, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            cn = row.get("client_name", "").strip()
+            if not cn:
+                continue
+            sig_text = row.get("signal", "") or row.get("signal_text", "") or ""
+            src = row.get("source", "") or row.get("source_name", "") or ""
+            if not sig_text:
+                # try other columns
+                sig_text = " ".join(v for k, v in row.items() if k not in ("client_name", "client_file", "source") and v.strip())[:200]
+            if sig_text:
+                by_client[cn].append({"text": sig_text, "source": src})
+    return by_client
+
+
+def load_industry_people():
+    """industry_people_index_v0.4.csv → additional ЛПР per client."""
+    p = BASE / "data" / "industry_people_index_v0.4.csv"
+    by_client = defaultdict(list)
+    if not p.exists():
+        return by_client
+    with open(p, encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            cn = row.get("client", "").strip() or row.get("client_name", "").strip()
+            if not cn:
+                continue
+            by_client[cn].append({
+                "name": row.get("name", ""),
+                "title": row.get("title", ""),
+                "role": row.get("role", ""),
+                "source": row.get("source", ""),
+                "confidence": row.get("confidence", ""),
+            })
+    return by_client
+
+
+def load_segments():
+    """6 segment .md files → segment_data."""
+    segs = {}
+    for fname in SEGMENT_FROM_FOLDER.values():
+        p = BASE / "segments" / f"{fname}.md"
+        if not p.exists():
+            continue
+        text = p.read_text(encoding="utf-8")
+        # Extract sections: skip frontmatter, get H2 sections
+        body = re.sub(r"^---\n.*?\n---\n", "", text, count=1, flags=re.DOTALL)
+        sections = {}
+        # Парсим по H2
+        for match in re.finditer(r"^## ([^\n]+)\n(.*?)(?=^## |\Z)", body, re.MULTILINE | re.DOTALL):
+            title = match.group(1).strip()
+            content = match.group(2).strip()
+            sections[title] = content
+        # Description from beginning to first ##
+        desc_match = re.match(r"# ([^\n]+)\n\n([^\n]+)", body)
+        segs[fname] = {
+            "label": SEGMENT_LABELS.get(fname, fname),
+            "title": desc_match.group(1) if desc_match else fname,
+            "intro": desc_match.group(2) if desc_match else "",
+            "sections": sections,
+        }
+    return segs
+
+
 def load_outreach_tiers():
     """Map (client_name OR person) → tier info."""
     p = BASE / "data" / "outreach_tiers_v0.5.csv"
@@ -215,6 +284,9 @@ def build():
     research_csv = BASE / "data" / "research_results_v0.3.csv"
     linkedin_by_client = load_linkedin_contacts()
     outreach_by_client = load_outreach_tiers()
+    industry_signals_by_client = load_industry_signals()
+    industry_people_by_client = load_industry_people()
+    segments_data = load_segments()
 
     leads = []
 
@@ -283,6 +355,8 @@ def build():
                 "decision_makers": dms[:5],
                 "people_to_verify": verify[:5],
                 "linkedin_contacts": li_contacts[:5],
+                "industry_signals": industry_signals_by_client.get(client_name, [])[:6],
+                "industry_people": industry_people_by_client.get(client_name, [])[:5],
                 "source_links_md": srcs_clean,
                 # Generated
                 "stage": stage,
@@ -344,6 +418,7 @@ def build():
     data = {
         "leads": leads,
         "managers": mgr_stats,
+        "segments": segments_data,
         "stats": {
             "total": len(leads),
             "active_total": sum(1 for l in leads if l["stage"] not in ("Закрыто (won)", "Закрыто (lost)")),

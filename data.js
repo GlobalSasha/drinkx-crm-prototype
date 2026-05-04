@@ -49,6 +49,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[РУВИКИ](https://ru.ruwiki.ru/wiki/%D0%90%D0%BF%D1%80%D0%B5%D0%BB%D1%8C_(%D0%B0%D0%BF%D1%82%D0%B5%D0%BA%D0%B0))",
     "[Leader Franchise](https://leaderfranchise.ru/franshiza-aprel-apteka)",
@@ -119,6 +121,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Shopandmall.ru](https://shopandmall.ru/retail/ashan)",
     "[Retail.ru](https://www.retail.ru/rbc/tradingnetworks/ashan/)",
@@ -194,6 +198,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia](https://en.wikipedia.org/wiki/Fix_Price)",
     "[IR Business Model](https://ir.fix-price.com/overview/business_model_and_strategy/)",
@@ -256,6 +262,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[RetailTech portrait](https://retailtech.ru/portretseti-yarche/)",
     "[NGS business](https://ngs.ru/text/business/2025/03/28/75273929/)",
@@ -330,6 +338,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://www.monetka.ru)",
     "[Career page](https://career.monetka.ru/o-kompanii/)",
@@ -415,6 +425,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://www.askona.ru)",
     "[About](https://www.askona.ru/about/)",
@@ -498,6 +510,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[О компании](https://market-da.ru/about.html)",
     "[Адреса](https://market-da.ru/shops.html)",
@@ -572,6 +586,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[av.ru/about](https://av.ru/about/)",
     "[Retail.ru](https://www.retail.ru/rbc/tradingnetworks/azbuka_vkusa/)",
@@ -643,6 +659,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[X5 Geography](https://www.x5.ru/ru/about/where-we-operate/)",
     "[Wikipedia Perekrestok](https://en.wikipedia.org/wiki/Perekrestok_(supermarket_chain))",
@@ -722,6 +740,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[О нас](https://vkusvill.ru/about/)",
     "[Контакты](https://vkusvill.ru/contacts/)",
@@ -795,6 +815,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[TAdviser DNS](https://tadviser.com/index.php/Company:DNS_Digital_Store)",
     "[LinkedIn DNS](https://www.linkedin.com/company/-dns)",
@@ -865,6 +887,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[baucenter.ru/company/](https://baucenter.ru/company/)",
     "[baucenter.ru/company/history/](https://baucenter.ru/company/history/)",
@@ -942,6 +966,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia](https://ru.wikipedia.org/wiki/Бристоль_(сеть_магазинов))",
     "[РУВИКИ](https://ru.ruwiki.ru/wiki/Бристоль_(сеть_магазинов))",
@@ -1032,6 +1058,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[X5 Geography](https://www.x5.ru/ru/about/where-we-operate/)",
     "[Forbes X5](https://www.forbes.ru/profile/244787-x5-retail-group)",
@@ -1100,6 +1128,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Википедия](https://ru.wikipedia.org/wiki/Читай-город)",
     "[О компании](https://www.chitai-gorod.ru/about)",
@@ -1179,6 +1209,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[corp.detmir.ru/about](https://corp.detmir.ru/about/)",
     "[corp.detmir.ru/contacts](https://corp.detmir.ru/contacts/)",
@@ -1242,6 +1274,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://www.globus.ru)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Глобус_(сеть_гипермаркетов))",
@@ -1319,6 +1353,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[О компании](https://www.maria-ra.ru/o-kompanii/)",
     "[Контакты](https://www.maria-ra.ru/o-kompanii/kontakty/)",
@@ -1392,6 +1428,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://krasnoeibeloe.ru)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Красное_&_Белое)",
@@ -1448,6 +1486,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[5ka.ru](https://5ka.ru)",
     "[X5 Wikipedia](https://ru.wikipedia.org/wiki/X5)",
@@ -1520,6 +1560,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный about](https://metro-cc.ru/about)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Metro_AG)",
@@ -1604,6 +1646,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Википедия](https://ru.wikipedia.org/wiki/Золотое_яблоко)",
     "[Forbes](https://www.forbes.ru/biznes/530987-bez-deneg-no-scastliva-kak-zolotoe-abloko-sobiraet-tolpy-v-svoih-magazinah)",
@@ -1685,6 +1729,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia](https://ru.wikipedia.org/wiki/Буквоед)",
     "[Rusprofile](https://www.rusprofile.ru/id/6892395)",
@@ -1761,6 +1807,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://www.famil.ru)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Familia_(%D1%81%D0%B5%D1%82%D1%8C_%D0%BC%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD%D0%BE%D0%B2))",
@@ -1828,6 +1876,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia RU](https://ru.wikipedia.org/wiki/Дикси_(сеть_магазинов))",
     "[Wikipedia EN](https://en.wikipedia.org/wiki/Dixy)",
@@ -1898,6 +1948,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia](https://ru.wikipedia.org/wiki/36,6_(%D0%B0%D0%BF%D1%82%D0%B5%D1%87%D0%BD%D0%B0%D1%8F_%D1%81%D0%B5%D1%82%D1%8C))",
     "[366.ru](https://366.ru)",
@@ -1970,6 +2022,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт О’КЕЙ](https://www.okmarket.ru)",
     "[O'KEY group — LinkedIn](https://www.linkedin.com/company/o'key-group)",
@@ -2054,6 +2108,8 @@ window.REAL_DATA = {
      "verification_status": "linkedin_reported"
     }
    ],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Википедия Лента](https://ru.wikipedia.org/wiki/Лента_(сеть_магазинов))",
     "[Lenta corporate](https://www.lentagroup.ru/ru/)",
@@ -2131,6 +2187,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://www.rigla.ru)",
     "[Команда](https://www.rigla.ru/c/team)",
@@ -2206,6 +2264,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[mayakgm.ru](https://mayakgm.ru)",
     "[mayakgm.ru/contacts](https://mayakgm.ru/contacts.html)",
@@ -2281,6 +2341,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Investor site](https://www.magnit.com/en/)",
     "[Wikipedia](https://en.wikipedia.org/wiki/Magnit)",
@@ -2366,6 +2428,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Retail.ru](https://www.retail.ru/rbc/tradingnetworks/magnit-kosmetik/)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Магнит_(сеть_магазинов))",
@@ -2460,6 +2524,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://www.mvideoeldorado.ru)",
     "[География](https://www.mvideoeldorado.ru/ru/about-us/footprint)",
@@ -2534,6 +2600,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[РУВИКИ](https://ru.ruwiki.ru/wiki/%D0%A0%D0%B8%D0%B2_%D0%93%D0%BE%D1%88)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/%D0%A0%D0%B8%D0%B2_%D0%93%D0%BE%D1%88)",
@@ -2597,6 +2665,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://planetazdorovo.ru)",
     "[Rusprofile](https://www.rusprofile.ru/id/2527548)",
@@ -2667,6 +2737,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://petrovich.ru)",
     "[rusprofile.ru](https://www.rusprofile.ru/id/1899042)",
@@ -2746,6 +2818,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://www.sportmaster.ru)",
     "[B2B контакты](https://b2b.sportmaster.ru/contacts)",
@@ -2821,6 +2895,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://cafe-anderson.ru)",
     "[Businessmens франшиза](https://businessmens.ru/franchise/anderson---semeynoe-kafe-1242)",
@@ -2890,6 +2966,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[OBI.ru](https://obi.ru)",
     "[Forbes Лента покупка](https://www.forbes.ru/biznes/553446-lenta-ob-avila-o-pokupke-biznesa-obi-rossia)",
@@ -2961,6 +3039,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia](https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D1%84%D0%B5_%D0%A5%D0%B0%D1%83%D0%B7)",
     "[Audit-IT](https://www.audit-it.ru/contragent/1027739135236_ooo-kofe-khaus)",
@@ -3038,6 +3118,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://british-bakery.ru)",
     "[Контакты](https://british-bakery.ru/contacts/)",
@@ -3132,6 +3214,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[SPAR Online - доставка продуктов питания](https://myspar.ru)",
     "[SPAR Online: Контакты](https://myspar.ru/contacts/)",
@@ -3202,6 +3286,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official About](https://www.maxidom.ru/about/)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Максидом)",
@@ -3264,6 +3350,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://abc-roasters.com)",
     "[Locations](https://abc-roasters.com/locations)",
@@ -3355,6 +3443,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Hoff.ru](https://hoff.ru)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Hoff)",
@@ -3431,6 +3521,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Svetofor-zakup.ru (электронный отдел закупа)](https://svetofor-zakup.ru), [Wikipedia: «Светофор» (торговая сеть)](https://ru.wikipedia.org/wiki/%D0%A1%D0%B2%D0%B5%D1%82%D0%BE%D1%84%D0%BE%D1%80_(%D1%82%D0%BE%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F_%D1%81%D0%B5%D1%82%D1%8C)), [Фонтанка (об автономной структуре управления)](https://www.fontanka.ru/2025/03/28/75275066/), [Sostav.ru (данные INFOLine о сокращении сети)](https://www.sostav.ru/publication/svetofor-zakryl-bolee-10-magazinov-v-proshlom-godu-82392.html), [Retail.ru (перепечатка данных о сокращении сети)](https://www.retail.ru/news/set-svetofor-zakryla-bolee-10-magazinov-v-2025-godu-17-marta-2026-275587/), [Svetoforonline (каталог/точки)](https://svetoforonline.ru), [Svetoforpfo.ru (пример регионального каталога/категорий)](https://svetoforpfo.ru"
    ],
@@ -3515,6 +3607,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Office Life (продажа сети)](https://officelife.media/news/71206-v-rossii-prodayut-set-kofeen-cofix-ona-predstavlena-i-v-belarusi/)",
     "[Rusprofile (CEO, финансы)](https://www.rusprofile.ru/id/10482694)",
@@ -3589,6 +3683,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[akcoffee.ru](https://akcoffee.ru)",
     "[akademiacoffee.com](http://akademiacoffee.com)",
@@ -3653,6 +3749,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://upsidedowncake.ru)",
     "[About us EN](https://upsidedowncake.ru/en/o-nas)",
@@ -3729,6 +3827,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://brusnikacafe.ru)",
     "[Instagram](https://www.instagram.com/brusnikacafemsk/)",
@@ -3785,6 +3885,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[fvolchek.ru](https://fvolchek.ru)",
     "[2GIS](https://2gis.ru/spb/search/%D0%9F%D0%B5%D0%BA%D0%B0%D1%80%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BB%D1%8C%D1%87%D0%B5%D0%BA%D0%B0)",
@@ -3860,6 +3962,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://pravdacoffee.ru)",
     "[Rusprofile](https://www.rusprofile.ru/id/11518427)",
@@ -3945,6 +4049,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://tseh85.ru)",
     "[Shops](https://tseh85.ru/shops)",
@@ -4015,6 +4121,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://skuratovcoffee.ru)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Skuratov_Coffee)",
@@ -4094,6 +4202,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[xleb.ru/about](https://xleb.ru/about)",
     "[fr.xleb.ru](https://fr.xleb.ru)",
@@ -4178,6 +4288,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[drinkit.ru](https://drinkit.ru)",
     "[drinkit.io](http://drinkit.io)",
@@ -4250,6 +4362,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://hlebnasushny.ru)",
     "[Ведомости/Forbes 2025](https://www.forbes.ru/biznes/550238-vedomosti-set-hleb-nasusnyj-pocti-polnost-u-zakrylas)",
@@ -4337,6 +4451,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[X5: Chizhik opens its 3,000th store](https://www.x5.ru/en/news/chizhik-opens-its-3000th-store/)",
     "[X5: Chizhik expands online deliveries](https://www.x5.ru/en/news/x5s-chizhik-expands-online-deliveries-to-more-than-40-russian-regions/)",
@@ -4423,6 +4539,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official RU](https://onepricecoffee.com)",
     "[Official EN](https://en.onepricecoffee.com)",
@@ -4492,6 +4610,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://coffeeshopcompany.ru)",
     "[VK](https://vk.com/coffeeshopcomp)",
@@ -4555,6 +4675,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://33pingvina.ru)",
     "[Franchise site](https://franchise.33pingvina.ru)",
@@ -4622,6 +4744,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://coffeebean.ru)",
     "[Франшиза](https://coffeebean.ru/franchise/)",
@@ -4709,6 +4833,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://www.lemanapro.ru)",
     "[Reuters](https://www.reuters.com/business/retail-consumer/leroy-merlins-former-russian-arm-rebrands-lemana-pro-2024-06-18/)",
@@ -4774,6 +4900,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[ЛЭТУАЛЬ (официальный сайт)](https://www.letu.ru)",
     "[Rusprofile: ООО «Алькор и КО»](https://www.rusprofile.ru/id/653022)",
@@ -4850,6 +4978,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://stars-coffee.ru)",
     "[Franchise](https://stars-coffee.ru/franchise)",
@@ -4929,6 +5059,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[karavaevi.ru](https://karavaevi.ru)",
     "[Контакты — karavaevi.ru](https://www.karavaevi.ru/kontakty/)",
@@ -4994,6 +5126,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Кофейни «Даблби»](https://double-b.ru)",
     "[VK: Даблби кофейня](https://vk.com/doublebcoffeetea?search=1)",
@@ -5075,6 +5209,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[PRIME — официальный сайт](https://prime-star.ru), [PRIME — О компании](https://prime-star.ru/about/), [PRIME — Контакты/карта кафе](https://prime-star.ru/contacts/), [PRIME — Поставщикам](https://prime-star.ru/business/provider/), [PRIME — Франшиза](https://prime-star.ru/business/franchise/), [Коммерсантъ](https://www.kommersant.ru/doc/8290223), [Posta Magazine — интервью с директором по маркетингу PRIME](https://posta-magazine.ru/article/maria-loshkova-prime-marketing-and-communications-director-interview/), [Retail.ru (о совладельце/сделке)](https://www.retail.ru/news/u-seti-prime-smenilsya-sovladelets-anton-pinskiy-vykupil-dolyu-u-arkadiya-noviko-12-dekabrya-2025-272489/)"
    ],
@@ -5154,6 +5290,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Coffeemania.ru (главная/рестораны)](https://coffeemania.ru)",
     "[Coffeemania.ru — about](https://coffeemania.ru/about)",
@@ -5235,6 +5373,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[shoko.ru (главная)](https://shoko.ru)",
     "[О компании (shoko.ru)](https://shoko.ru/about/)",
@@ -5311,6 +5451,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://pizzafabrika.ru)",
     "[Retail.ru](https://www.retail.ru/rbc/tradingnetworks/pitstsafabrika_rf/)",
@@ -5383,6 +5525,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia](https://ru.wikipedia.org/wiki/Вкусно_—_и_точка)",
     "[Официальный сайт](https://vkusnoitochka.ru)",
@@ -5458,6 +5602,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://mnogolososya.ru)",
     "[Forbes](https://www.forbes.ru/svoi-biznes/486627-ryba-kit-kak-startap-mnogo-lososa-zivet-vnutri-x5-group)",
@@ -5538,6 +5684,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Leave Russia](https://leave-russia.org/burger-king-restaurant-brands)",
     "[Коммерсантъ](https://www.kommersant.ru/doc/7940146)",
@@ -5617,6 +5765,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://farshburger.ru)",
     "[Novikov Group](https://www.novikovgroup.ru/restaurants/detail/farsh/)",
@@ -5696,6 +5846,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia](https://ru.wikipedia.org/wiki/Кухня_на_районе)",
     "[localkitchen.ru](https://localkitchen.ru)",
@@ -5768,6 +5920,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Franchise site](https://franchise.tanukifamily.ru)",
     "[Main site](https://tanukifamily.ru)",
@@ -5839,6 +5993,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Bushe main](https://bushe.ru)",
     "[Bushe about RU](https://bushe.ru/about)",
@@ -5908,6 +6064,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia RU](https://ru.wikipedia.org/wiki/Traveler%E2%80%99s_Coffee)",
     "[LinkedIn Company](https://www.linkedin.com/company/travelers-coffee)",
@@ -5972,6 +6130,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://www.cafemumu.ru/)",
     "[Контакты](https://www.cafemumu.ru/contacts/)",
@@ -6041,6 +6201,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Cyclowiki](https://cyclowiki.org/wiki/Столички_(аптечная_сеть))",
     "[Rusprofile](https://www.rusprofile.ru/id/10481804)",
@@ -6126,6 +6288,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://tashirpizza.ru)",
     "[About brand](https://tashirpizza.ru/page/o-brende)",
@@ -6198,6 +6362,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://sushiwok.ru)",
     "[Franchise](https://get.sushiwok.ru/)",
@@ -6269,6 +6435,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://teremok.ru)",
     "[RBC SPb](https://www.rbc.ru/spb_sz/16/12/2024/675fd3449a7947b26cbfc677)",
@@ -6323,6 +6491,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site about](https://yakitoriya.ru/about)",
     "[Franchise page](https://franshiza.ru/franchise/read/yakitoriya/)",
@@ -6392,6 +6562,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[audit-it.ru](https://www.audit-it.ru/contragent/5177746080694_ooo-milti)",
     "[mealty.ru](https://www.mealty.ru)",
@@ -6459,6 +6631,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://www.bashneft-azs.ru)",
     "[Википедия](https://ru.wikipedia.org/wiki/Башнефть)",
@@ -6503,6 +6677,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Search results](https://perplexity.ai/tools/search_web)",
     "[People search](https://perplexity.ai/tools/search_vertical)",
@@ -6583,6 +6759,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт](https://www.rosinter.ru)",
     "[Структура управления](https://www.rosinter.ru/about/managment/)",
@@ -6658,6 +6836,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[trassagk.ru/about](https://trassagk.ru/about)",
     "[rusprofile.ru/id/6613019](https://www.rusprofile.ru/id/6613019)",
@@ -6731,6 +6911,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://surfcoffee.ru)",
     "[Stores](https://www.surfcoffee.ru/surf-coffee-stores)",
@@ -6799,6 +6981,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[planetsushi.ru](https://planetsushi.ru)",
     "[planetsushi.ru/restaurants](https://planetsushi.ru/restaurants/)",
@@ -6876,6 +7060,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[TAdviser](https://tadviser.com/index.php/Company:Gazpromneft-regional_sales_Network_of_gas_station)",
     "[Interfax](https://www.interfax.ru/interview/1025493)",
@@ -6942,6 +7128,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[azsirbis.ru](https://azsirbis.ru)",
     "[card-oil.ru](https://card-oil.ru/azs-irbis-ofitcyalnyi-sait-lichnyi-kabinet-karta-azs-set-toplivnye-karty/)",
@@ -7017,6 +7205,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Rostic’s официальный сайт](https://www.rostics.ru)",
     "[Retail.ru (о сети Rostic’s)](https://www.retail.ru/rbc/tradingnetworks/rostic-s/)",
@@ -7096,6 +7286,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Dodo Brands Strategy](https://dodobrands.io/post/dodo-pizza-strategy-2025-2030/)",
     "[Wikipedia](https://en.wikipedia.org/wiki/Dodo_Pizza)",
@@ -7189,6 +7381,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт kartoshka.com](https://www.kartoshka.com)",
     "[kartoshka.com — «История успеха»](https://www.kartoshka.com/o-kompanii/success/)",
@@ -7247,6 +7441,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[azsgazprom.ru](https://www.azsgazprom.ru)",
     "[Gazprom news](https://www.gazprom.ru/about/subsidiaries/news/2024/april/article573605/)",
@@ -7297,6 +7493,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia](https://ru.wikipedia.org/wiki/Петербургская_топливная_компания)",
     "[Rusprofile](https://www.rusprofile.ru/id/925811)",
@@ -7375,6 +7573,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://coffee-like.com)",
     "[Wikipedia](https://ru.wikipedia.org/wiki/Coffee_Like)",
@@ -7436,6 +7636,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [],
    "stage": "Новые лиды",
    "deal_amount": 9800000,
@@ -7508,6 +7710,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт «Грабли»](https://grabli.ru)",
     "[Страница «Грабли Фри-Фло» (рестораны/локации)](https://grabli.ru/grabli)",
@@ -7580,6 +7784,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[wolkonsky.com](https://wolkonsky.com)",
     "[Адреса](https://wolkonsky.com/address/)",
@@ -7625,6 +7831,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official website](https://kitchen-line.ru)",
     "[Website product page](https://kitchen-line.ru/page25843868.html)",
@@ -7682,6 +7890,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[RN-West AZS list](https://www.rn-west.by/nasha-set/adresa-azs.html)",
     "[Slavneft main site](https://www.slavneft.ru)",
@@ -7740,6 +7950,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[au92.ru](https://au92.ru/novosti/set-azs-opti-pomozhet-prokachat-biznes/)",
     "[franshiza.ru](https://franshiza.ru/franchise/read/opti/)",
@@ -7810,6 +8022,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia Tatneft](https://en.wikipedia.org/wiki/Tatneft)",
     "[Google Play AZS Tatneft](https://play.google.com/store/apps/details?id=ru.tatneft.gasstations)",
@@ -7869,6 +8083,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Neste sale announcement](https://neste.com/news/neste-to-divest-its-fuel-retail-business-in-russia-and-sell-it-to-pjsc-tatneft)",
     "[RBC rebranding](https://www.rbc.ru/spb_sz/19/01/2021/60067cff9a7947857c80f5d0)",
@@ -7937,6 +8153,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Rusprofile](https://www.rusprofile.ru/id/3821117)",
     "[ABN bankruptcy news](https://abn.agency/2026/04/06/fns-podala-zayavlenie-o-bankrotstve-seti-azs-faeton/)",
@@ -8009,6 +8227,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Stardogs.ru](https://www.stardogs.ru), [Stardogs franchise page](https://www.stardogs.ru/franchise), [РБК Компании — ООО «Маркон»](https://companies.rbc.ru/id/1037789062079-ooo-markon/), [Russian Franchise Association — Stardogs](https://www.rusfranch.ru/franchise/stardogs/), [Tatiana Kornienko LinkedIn](https://www.linkedin.com/in/tatiana-yu-kornienko), [VK Stardogs Volgograd](https://vk.com/stardogs2022), [Facebook Stardogs page](https://www.facebook.com/100055111450022/reels/), [stardogs-ru.1gb.ru personalies](http://stardogs-ru.1gb.ru/?page=personalies), [ShopandMall news (ownership/scale claim)](https://shopandmall.ru/news/vladelec-stardogs-zapustil-set-zavedenij-s-premialnymi-hot-dogami)"
    ],
@@ -8055,6 +8275,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[k-rus.org](https://k-rus.org)",
     "[k-rus.org about](https://k-rus.org/dr-coffee-brand-lider-v-kitae-istoriya)",
@@ -8116,6 +8338,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[card-oil.ru/azs/surgutneftegaz/](https://card-oil.ru/azs/surgutneftegaz/)",
     "[surgutneftegas39.ru/nashi-azs/](https://surgutneftegas39.ru/nashi-azs/)",
@@ -8192,6 +8416,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Wikipedia Lukoil](https://en.wikipedia.org/wiki/Lukoil)",
     "[ATI.ru network size](https://news.ati.su/news/2025/04/22/lukojl-v-2024-godu-uvelichil-chislo-zapravok-v-rf-na-29-435038/)",
@@ -8286,6 +8512,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Официальный сайт Dostaевский](https://dostaevsky.ru)",
     "[Медиакит Dostaевский](https://news.dostaevsky.ru/mediakit)",
@@ -8369,6 +8597,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official site](https://carlsjr-russia.ru)",
     "[Contacts SPb](https://carlsjr-russia.ru/contacts-training)",
@@ -8427,6 +8657,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[rosneft-azs.ru](https://rosneft-azs.ru)",
     "[rosneft.ru retail](https://www.rosneft.ru/business/Downstream/petroleum_product_sales/servicestations/)",
@@ -8484,6 +8716,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[eka.ru (текущее содержимое домена)](https://www.eka.ru)",
     "[РБК про покупку ЕКА ЛУКОЙЛом](https://www.rbc.ru/business/24/03/2022/623c15aa9a79471d4603b732)",
@@ -8539,6 +8773,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[RussNeft – Главная](https://russneft.ru)",
     "[RussNeft – О компании](https://russneft.ru/about/)",
@@ -8612,6 +8848,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Retail.ru](https://www.retail.ru/news/gendirektor-subway-ukhodit-v-otstavku/)",
     "[Vedomosti](https://www.vedomosti.ru/business/articles/2025/09/24/1141473-v-rossii-poyavitsya-novaya-set-restoranov-sendvic ei)",
@@ -8685,6 +8923,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[LinkedIn MIKO Group](https://www.linkedin.com/company/miko-group-of-companies)",
     "[miko-premiumtastes.com](https://www.miko-premiumtastes.com/ru/)",
@@ -8759,6 +8999,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[unicum.ru](https://unicum.ru)",
     "[unicum.ru/about](https://unicum.ru/about)",
@@ -8829,6 +9071,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[VendShop main](https://vend-shop.com)",
     "[About](https://vend-shop.com/o-kompanii/)",
@@ -8886,6 +9130,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Homepage](https://labcoffee.ru/)",
     "[Nuova Simonelli](https://labcoffee.ru/magazin/vendor/nuova-simonelli)",
@@ -8953,6 +9199,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[RH Group site](https://retailhoreca.net/), [RusHOLTS кейс «Dixy»](https://retailhoreca.net/dixy), [LinkedIn: RusHOLTS (RH Group)](https://www.linkedin.com/company/rusholts), [Каталог РусХОЛТС](https://retailhoreca.ru/catalog), [Instagram: @rusholts](https://www.instagram.com/rusholts/), [РБК Компании (ООО «РУСХОЛТС»)](https://companies.rbc.ru/id/1027807593879-ooo-rusholts/)"
    ],
@@ -9015,6 +9263,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Official SAECO site](https://saeco.nt-rt.ru/en)",
     "[Main nt-rt.ru](https://nt-rt.ru)",
@@ -9094,6 +9344,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Teboil.ru (главная)](https://teboil.ru)",
     "[Teboil news (итоги 2025)](https://teboil.ru/news/rost-seti-do-450-azs-i-2-5-mln-klientov-teboil-podvodit-predvaritelnye-itogi-2025-goda/)",
@@ -9171,6 +9423,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Retail.ru](https://www.retail.ru/rbc/tradingnetworks/papa_dzhons/)",
     "[Interfax 2017](https://www.interfax.ru/pressreleases/553558)",
@@ -9248,6 +9502,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[iL Патио — официальный сайт](https://ilpatio.ru)",
     "[iL Патио — «О ресторане»](https://ilpatio.ru/about)",
@@ -9319,6 +9575,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Atesy.ru главная](https://atesy.ru), [О компании АТЕСИ](https://atesy.ru/about/), [Информация для дилеров и партнеров](https://atesy.ru/for-dealers/), [Контакты АТЕСИ](https://atesy.ru/contacts/), [Audit-it карточка контрагента](https://www.audit-it.ru/contragent/1225000096310_ooo-zavod-atesi), [АТЕСИ Профессиональное Кухонное Оборудование (VK)](https://vk.com/atesy?search=1), [АТЕСИ (Facebook)](https://www.facebook.com/106748561456669)"
    ],
@@ -9395,6 +9653,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[Нефтьмагистраль — главная](https://neftm.ru)",
     "[Нефтьмагистраль — Кто мы](https://neftm.ru/o-kompanii/kto-my/)",
@@ -9469,6 +9729,8 @@ window.REAL_DATA = {
     }
    ],
    "linkedin_contacts": [],
+   "industry_signals": [],
+   "industry_people": [],
    "source_links_md": [
     "[About](https://t-d.ru/about/)",
     "[Branches](https://t-d.ru/branches/)",
@@ -9538,6 +9800,74 @@ window.REAL_DATA = {
    "won_count": 1
   }
  ],
+ "segments": {
+  "food_retail": {
+   "label": "Продуктовый ритейл",
+   "title": "food_retail",
+   "intro": "",
+   "sections": {
+    "Кого искать": "- директор по закупкам\n- категорийный менеджер по кофе / напиткам / ready-to-eat\n- директор по foodservice / готовой еде\n- операционный директор формата\n- директор по клиентскому опыту / инновациям",
+    "Клиенты сегмента": "- [[../01_food_retail/x5_group.md|X5 Group]] — приоритет A, потенциал очень высокий\n- [[../01_food_retail/magnit.md|Магнит]] — приоритет A, потенциал очень высокий\n- [[../01_food_retail/lenta.md|Лента]] — приоритет A, потенциал высокий\n- [[../01_food_retail/vkusvill.md|ВкусВилл]] — приоритет A, потенциал высокий\n- [[../01_food_retail/metro_russia.md|METRO Россия]] — приоритет B, потенциал высокий\n- [[../01_food_retail/pyaterochka.md|Пятёрочка]] — приоритет A, потенциал очень высокий\n- [[../01_food_retail/perekrestok.md|Перекрёсток]] — приоритет A, потенциал очень высокий\n- [[../01_food_retail/chizhik.md|Чижик]] — приоритет A, потенциал высокий\n- [[../01_food_retail/dixy.md|Дикси]] — приоритет A, потенциал высокий\n- [[../01_food_retail/auchan_russia.md|Ашан Россия]] — приоритет B, потенциал высокий\n- [[../01_food_retail/okey.md|О'КЕЙ]] — приоритет B, потенциал высокий\n- [[../01_food_retail/da_discounter.md|ДА!]] — приоритет B, потенциал средний-высокий\n- [[../01_food_retail/azbuka_vkusa.md|Азбука вкуса]] — приоритет A, потенциал высокий\n- [[../01_food_retail/globus.md|Глобус]] — приоритет B, потенциал высокий\n- [[../01_food_retail/spar_eurospar.md|SPAR / EUROSPAR]] — приоритет B, потенциал средний-высокий\n- [[../01_food_retail/svetofor.md|Светофор]] — приоритет C, потенциал средний\n- [[../01_food_retail/mayak.md|Маяк]] — приоритет C, потенциал средний\n- [[../01_food_retail/yarche.md|Ярче!]] — приоритет B, потенциал средний-высокий\n- [[../01_food_retail/maria_ra.md|Мария-Ра]] — приоритет B, потенциал средний-высокий\n- [[../01_food_retail/monetka.md|Монетка]] — приоритет B, потенциал средний-высокий\n- [[../01_food_retail/krasnoe_beloe.md|Красное & Белое]] — приоритет B, потенциал средний-высокий\n- [[../01_food_retail/bristol.md|Бристоль]] — приоритет B, потенциал средний",
+    "Базовая гипотеза DrinkX": "DrinkX должен продаваться не как «кофемашина», а как готовая категория / станция / операционный модуль, который увеличивает выручку точки и снимает часть операционной сложности с клиента.",
+    "Типовые вопросы discovery": "- Где сейчас продаётся кофе и кто отвечает за этот P&L?\n- Какой текущий поставщик оборудования, зерна и сервиса?\n- Какая маржа и средняя дневная продажа напитков по точке?\n- Что сейчас болит: скорость, качество, простой оборудования, персонал, сервис, себестоимость или контроль?\n- Как обычно запускаются пилоты и кто утверждает масштабирование?"
+   }
+  },
+  "non_food_retail": {
+   "label": "Непродуктовый ритейл",
+   "title": "non_food_retail",
+   "intro": "",
+   "sections": {
+    "Кого искать": "- коммерческий директор\n- директор по закупкам\n- директор по развитию формата\n- директор по клиентскому опыту\n- руководитель направления дополнительных сервисов",
+    "Клиенты сегмента": "- [[../02_non_food_retail/mvideo_eldorado.md|М.Видео-Эльдорадо]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/dns.md|DNS]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/lemana_pro.md|Lemana PRO]] — приоритет A, потенциал высокий\n- [[../02_non_food_retail/fix_price.md|Fix Price]] — приоритет B, потенциал средний\n- [[../02_non_food_retail/magnit_cosmetic.md|Магнит Косметик]] — приоритет C, потенциал средний\n- [[../02_non_food_retail/hoff.md|Hoff]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/familia.md|Familia]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/sportmaster.md|Спортмастер]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/detsky_mir.md|Детский мир]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/goldapple.md|Золотое Яблоко]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/letual.md|ЛЭтуаль]] — приоритет C, потенциал средний\n- [[../02_non_food_retail/rive_gauche.md|Рив Гош]] — приоритет C, потенциал средний\n- [[../02_non_food_retail/chitai_gorod.md|Читай-город]] — приоритет B, потенциал средний\n- [[../02_non_food_retail/bookvoed.md|Буквоед]] — приоритет C, потенциал средний\n- [[../02_non_food_retail/petrovich.md|Петрович]] — приоритет A, потенциал высокий\n- [[../02_non_food_retail/maxidom.md|Максидом]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/baucenter.md|Бауцентр]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/obi_russia.md|OBI Россия]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/askona.md|Аскона]] — приоритет C, потенциал средний\n- [[../02_non_food_retail/apteka_aprel.md|Аптека Апрель]] — приоритет B, потенциал средний-высокий\n- [[../02_non_food_retail/rigla.md|Ригла]] — приоритет B, потенциал средний\n- [[../02_non_food_retail/stolichki.md|Столички]] — приоритет C, потенциал средний\n- [[../02_non_food_retail/apteka_366.md|36.6]] — приоритет C, потенциал средний\n- [[../02_non_food_retail/planeta_zdorovya.md|Планета Здоровья]] — приоритет B, потенциал средний",
+    "Базовая гипотеза DrinkX": "DrinkX должен продаваться не как «кофемашина», а как готовая категория / станция / операционный модуль, который увеличивает выручку точки и снимает часть операционной сложности с клиента.",
+    "Типовые вопросы discovery": "- Где сейчас продаётся кофе и кто отвечает за этот P&L?\n- Какой текущий поставщик оборудования, зерна и сервиса?\n- Какая маржа и средняя дневная продажа напитков по точке?\n- Что сейчас болит: скорость, качество, простой оборудования, персонал, сервис, себестоимость или контроль?\n- Как обычно запускаются пилоты и кто утверждает масштабирование?"
+   }
+  },
+  "coffee_shops": {
+   "label": "Кофейни и кафе",
+   "title": "coffee_shops",
+   "intro": "",
+   "sections": {
+    "Кого искать": "- основатель / владелец сети\n- операционный директор\n- директор по продукту / меню\n- руководитель закупок кофе и оборудования\n- директор по франчайзингу",
+    "Клиенты сегмента": "- [[../03_coffee_shops/cofix_russia.md|Cofix Россия]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/one_price_coffee.md|One Price Coffee]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/coffee_like.md|Coffee Like]] — приоритет B, потенциал средний\n- [[../03_coffee_shops/shokoladnitsa.md|Шоколадница]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/surf_coffee.md|Surf Coffee]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/stars_coffee.md|Stars Coffee]] — приоритет A, потенциал высокий\n- [[../03_coffee_shops/drinkit.md|Дринкит]] — приоритет A, потенциал высокий\n- [[../03_coffee_shops/double_b.md|Double B]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/pravda_coffee.md|Правда Кофе]] — приоритет A, потенциал высокий\n- [[../03_coffee_shops/skuratov_coffee.md|Skuratov Coffee]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/akademia_coffee.md|Академия кофе]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/travelers_coffee.md|Traveler's Coffee]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/coffee_bean.md|Coffee Bean]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/coffeemania.md|Кофемания]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/abc_coffee_roasters.md|ABC Coffee Roasters]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/bushe.md|Буше]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/tseh85.md|ЦЕХ85]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/hlebnik.md|Хлебник]] — приоритет B, потенциал средний\n- [[../03_coffee_shops/volchek.md|Булочные Ф. Вольчека]] — приоритет B, потенциал средний-высокий\n- [[../03_coffee_shops/brusnika_cafe.md|Брусника]] — приоритет B, потенциал средний\n- [[../03_coffee_shops/anderson.md|АндерСон]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/hleb_nasushny.md|Хлеб Насущный]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/coffee_house.md|Кофе Хауз]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/coffeeshop_company.md|Coffeeshop Company]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/prime_cafe.md|PRIME]] — приоритет B, потенциал средний\n- [[../03_coffee_shops/karavaevi.md|Кулинарная лавка братьев Караваевых]] — приоритет B, потенциал средний\n- [[../03_coffee_shops/volkonsky.md|Волконский]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/upside_down_cake.md|Upside Down Cake]] — приоритет C, потенциал средний\n- [[../03_coffee_shops/british_bakery.md|Британские пекарни]] — приоритет C, потенциал средний",
+    "Базовая гипотеза DrinkX": "DrinkX должен продаваться не как «кофемашина», а как готовая категория / станция / операционный модуль, который увеличивает выручку точки и снимает часть операционной сложности с клиента.",
+    "Типовые вопросы discovery": "- Где сейчас продаётся кофе и кто отвечает за этот P&L?\n- Какой текущий поставщик оборудования, зерна и сервиса?\n- Какая маржа и средняя дневная продажа напитков по точке?\n- Что сейчас болит: скорость, качество, простой оборудования, персонал, сервис, себестоимость или контроль?\n- Как обычно запускаются пилоты и кто утверждает масштабирование?"
+   }
+  },
+  "qsr_fast_food": {
+   "label": "QSR / Fast Food",
+   "title": "qsr_fast_food",
+   "intro": "",
+   "sections": {
+    "Кого искать": "- директор по закупкам\n- директор по операционной эффективности\n- директор по меню / продукту\n- руководитель франчайзинга\n- директор по развитию сети",
+    "Клиенты сегмента": "- [[../04_qsr_fast_food/vkusno_i_tochka.md|Вкусно — и точка]] — приоритет A, потенциал очень высокий\n- [[../04_qsr_fast_food/rostics.md|Rostic's]] — приоритет A, потенциал высокий\n- [[../04_qsr_fast_food/dodo_pizza.md|Dodo Pizza]] — приоритет B, потенциал средний-высокий\n- [[../04_qsr_fast_food/teremok.md|Теремок]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/stardogs.md|Stardogs]] — приоритет C, потенциал средний\n- [[../04_qsr_fast_food/burger_king_russia.md|Burger King Россия]] — приоритет A, потенциал высокий\n- [[../04_qsr_fast_food/subway_russia.md|Subway Россия]] — приоритет B, потенциал средний-высокий\n- [[../04_qsr_fast_food/papa_johns_russia.md|Papa Johns Россия]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/kroshka_kartoshka.md|Крошка Картошка]] — приоритет B, потенциал средний-высокий\n- [[../04_qsr_fast_food/33_pingvina.md|33 пингвина]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/carls_jr_russia.md|Carl's Jr. Россия]] — приоритет C, потенциал средний\n- [[../04_qsr_fast_food/rosinter.md|Rosinter Restaurants]] — приоритет B, потенциал средний-высокий\n- [[../04_qsr_fast_food/il_patio.md|IL Patio]] — приоритет C, потенциал средний\n- [[../04_qsr_fast_food/planeta_sushi.md|Планета Суши]] — приоритет C, потенциал средний\n- [[../04_qsr_fast_food/tanuki.md|Тануки]] — приоритет C, потенциал средний\n- [[../04_qsr_fast_food/yakitoriya.md|Якитория]] — приоритет C, потенциал средний\n- [[../04_qsr_fast_food/mu_mu.md|Му-Му]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/grabli.md|Грабли]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/milti.md|Милти]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/kuhnya_na_rayone.md|Кухня на районе]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/sushi_wok.md|Суши Wok]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/dostaevsky.md|Достаевский]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/mnogo_lososya.md|Много Лосося]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/tashir_pizza.md|Ташир Пицца]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/pizza_fabrika.md|Пицца Фабрика]] — приоритет B, потенциал средний\n- [[../04_qsr_fast_food/farsh.md|FARШ]] — приоритет C, потенциал средний",
+    "Базовая гипотеза DrinkX": "DrinkX должен продаваться не как «кофемашина», а как готовая категория / станция / операционный модуль, который увеличивает выручку точки и снимает часть операционной сложности с клиента.",
+    "Типовые вопросы discovery": "- Где сейчас продаётся кофе и кто отвечает за этот P&L?\n- Какой текущий поставщик оборудования, зерна и сервиса?\n- Какая маржа и средняя дневная продажа напитков по точке?\n- Что сейчас болит: скорость, качество, простой оборудования, персонал, сервис, себестоимость или контроль?\n- Как обычно запускаются пилоты и кто утверждает масштабирование?"
+   }
+  },
+  "gas_stations": {
+   "label": "АЗС / дорожный foodservice",
+   "title": "gas_stations",
+   "intro": "",
+   "sections": {
+    "Кого искать": "- директор розничной сети АЗС\n- руководитель foodservice / кафе\n- директор по закупкам\n- категорийный менеджер coffee-to-go\n- директор по развитию клиентского сервиса",
+    "Клиенты сегмента": "- [[../05_gas_stations/gazpromneft_azs.md|Газпромнефть АЗС]] — приоритет A, потенциал очень высокий\n- [[../05_gas_stations/lukoil_teboil.md|ЛУКОЙЛ АЗС / Teboil]] — приоритет A, потенциал очень высокий\n- [[../05_gas_stations/rosneft_azs.md|Роснефть АЗС]] — приоритет A, потенциал очень высокий\n- [[../05_gas_stations/tatneft_azs.md|Татнефть АЗС]] — приоритет A, потенциал высокий\n- [[../05_gas_stations/neftmagistral.md|Нефтьмагистраль]] — приоритет B, потенциал высокий\n- [[../05_gas_stations/azs_trassa.md|АЗС Трасса]] — приоритет A, потенциал высокий\n- [[../05_gas_stations/eka.md|ЕКА]] — приоритет A, потенциал высокий\n- [[../05_gas_stations/teboil.md|Teboil]] — приоритет A, потенциал высокий\n- [[../05_gas_stations/bashneft_azs.md|Башнефть АЗС]] — приоритет A, потенциал высокий\n- [[../05_gas_stations/irbis_azs.md|Ирбис]] — приоритет B, потенциал средний-высокий\n- [[../05_gas_stations/surgutneftegas_azs.md|Сургутнефтегаз АЗС]] — приоритет B, потенциал средний-высокий\n- [[../05_gas_stations/opti.md|ОПТИ]] — приоритет B, потенциал средний-высокий\n- [[../05_gas_stations/gazprom_azs.md|Газпром АЗС]] — приоритет B, потенциал средний-высокий\n- [[../05_gas_stations/ptk.md|ПТК]] — приоритет B, потенциал средний\n- [[../05_gas_stations/phaeton.md|Фаэтон]] — приоритет C, потенциал средний\n- [[../05_gas_stations/nnk.md|ННК]] — приоритет B, потенциал средний-высокий\n- [[../05_gas_stations/slavneft_azs.md|Славнефть АЗС]] — приоритет C, потенциал средний\n- [[../05_gas_stations/russneft_azs.md|РуссНефть]] — приоритет C, потенциал средний\n- [[../05_gas_stations/esa_azs.md|ESA]] — приоритет B, потенциал средний-высокий\n- [[../05_gas_stations/neste_russia_legacy.md|Neste / сеть после смены владельца]] — приоритет C, потенциал средний",
+    "Базовая гипотеза DrinkX": "DrinkX должен продаваться не как «кофемашина», а как готовая категория / станция / операционный модуль, который увеличивает выручку точки и снимает часть операционной сложности с клиента.",
+    "Типовые вопросы discovery": "- Где сейчас продаётся кофе и кто отвечает за этот P&L?\n- Какой текущий поставщик оборудования, зерна и сервиса?\n- Какая маржа и средняя дневная продажа напитков по точке?\n- Что сейчас болит: скорость, качество, простой оборудования, персонал, сервис, себестоимость или контроль?\n- Как обычно запускаются пилоты и кто утверждает масштабирование?"
+   }
+  },
+  "coffee_equipment_distributors": {
+   "label": "Дистрибьюторы оборудования",
+   "title": "coffee_equipment_distributors",
+   "intro": "",
+   "sections": {
+    "Кого искать": "- собственник / генеральный директор\n- коммерческий директор\n- руководитель B2B-продаж\n- руководитель сервиса\n- директор по партнёрствам",
+    "Клиенты сегмента": "- [[../06_coffee_equipment_distributors/dr_coffee_k_rus.md|Dr.Coffee Россия / K-Rus]] — приоритет A, потенциал высокий\n- [[../06_coffee_equipment_distributors/miko_group_jura.md|MIKO Group / JURA Professional]] — приоритет B, потенциал средний-высокий\n- [[../06_coffee_equipment_distributors/rusholts_wmf.md|RusHOLTS / WMF]] — приоритет B, потенциал средний-высокий\n- [[../06_coffee_equipment_distributors/new_technologies_group_saeco.md|New Technologies Group / SAECO]] — приоритет B, потенциал средний\n- [[../06_coffee_equipment_distributors/lab_coffee_nuova_simonelli.md|Lab Coffee / Nuova Simonelli]] — приоритет C, потенциал средний\n- [[../06_coffee_equipment_distributors/unicum_vending.md|Unicum]] — приоритет B, потенциал средний-высокий\n- [[../06_coffee_equipment_distributors/vendshop.md|VendShop]] — приоритет C, потенциал средний\n- [[../06_coffee_equipment_distributors/torgoviy_dizain.md|Торговый Дизайн]] — приоритет B, потенциал средний\n- [[../06_coffee_equipment_distributors/atesy.md|АТЕСИ]] — приоритет C, потенциал средний\n- [[../06_coffee_equipment_distributors/kitchen_line.md|Kitchen Line]] — приоритет C, потенциал средний",
+    "Базовая гипотеза DrinkX": "DrinkX должен продаваться не как «кофемашина», а как готовая категория / станция / операционный модуль, который увеличивает выручку точки и снимает часть операционной сложности с клиента.",
+    "Типовые вопросы discovery": "- Где сейчас продаётся кофе и кто отвечает за этот P&L?\n- Какой текущий поставщик оборудования, зерна и сервиса?\n- Какая маржа и средняя дневная продажа напитков по точке?\n- Что сейчас болит: скорость, качество, простой оборудования, персонал, сервис, себестоимость или контроль?\n- Как обычно запускаются пилоты и кто утверждает масштабирование?"
+   }
+  }
+ },
  "stats": {
   "total": 131,
   "active_total": 126,
