@@ -6223,12 +6223,12 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
       const segChip = document.querySelector('.pipe-filters .seg-chip.active');
       renderPipelineBoard(segChip ? segChip.dataset.seg : 'all', document.getElementById('lead-search')?.value || '');
       // Update segment chip counts in-place
+      const SHORT_LABELS = { food_retail:'ритейл', non_food_retail:'non-food', coffee_shops:'кофейня', qsr_fast_food:'QSR', gas_stations:'АЗС', coffee_equipment_distributors:'дистр' };
       document.querySelectorAll('.pipe-filters .seg-chip[data-seg]').forEach(chip => {
         const seg = chip.dataset.seg;
         if (seg === 'all') return;
         const c = D.stats.by_segment[seg] || 0;
-        const SHORT = window.SHORT_SEG || { food_retail:'ритейл', non_food_retail:'non-food', coffee_shops:'кофейня', qsr_fast_food:'QSR', gas_stations:'АЗС', coffee_equipment_distributors:'дистр' };
-        chip.textContent = (SHORT[seg] || seg) + ' ' + c;
+        chip.textContent = (SHORT_LABELS[seg] || seg) + ' ' + c;
       });
       // Update stats line
       const statsEl = document.querySelector('#screen-pipeline .pipe-top .stats');
