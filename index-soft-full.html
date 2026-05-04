@@ -5616,6 +5616,16 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
 </div>
 
 <script>
+  // Hoisted up to avoid TDZ when accessed from earlier-defined functions
+  var SHORT_SEG = {
+    food_retail: 'ритейл',
+    non_food_retail: 'non-food',
+    coffee_shops: 'кофейня',
+    qsr_fast_food: 'QSR',
+    gas_stations: 'АЗС',
+    coffee_equipment_distributors: 'дистр',
+  };
+
   // Lead data — switching the lead in the card
   const LEADS = {
     'stars': { name: 'Stars Coffee', stage: 'Переговоры', deal: '₽4.5M', company: 'ООО «Арена» · ИНН 9705131922' },
@@ -6539,15 +6549,6 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
       <div class="ftr"><span>${lead.last_activity_days_ago === 0 ? 'сегодня' : lead.last_activity_days_ago + 'д назад'}</span><div class="av ${avClass}">${mgr.av}</div></div>
     </div>`;
   }
-
-  const SHORT_SEG = {
-    food_retail: 'ритейл',
-    non_food_retail: 'non-food',
-    coffee_shops: 'кофейня',
-    qsr_fast_food: 'QSR',
-    gas_stations: 'АЗС',
-    coffee_equipment_distributors: 'дистр',
-  };
 
   function renderPipelineBoard(segFilter, query) {
     const board = document.querySelector('#screen-pipeline .board');
