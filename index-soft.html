@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DrinkX CRM — таste-soft preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+  :root {
+    --canvas: #F2F2F0;
+    --canvas-2: #E8E8E5;
+    --ink: #0A0A0A;
+    --ink-2: #18181B;
+    --muted: #57575A;
+    --muted-2: #71717A;
+    --hairline: rgba(10,10,10,0.08);
+    --hairline-strong: rgba(10,10,10,0.14);
+    --innerlight: rgba(255,255,255,0.65);
+    --accent: #1F4D3F;
+    --accent-glow: #5A8C7A;
+    --warn: #B7672D;
+    --warn-glow: #D58A4D;
+    --rose: #B23A48;
+    --sans: 'Plus Jakarta Sans', 'Geist', 'Cabinet Grotesk', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', 'Geist Mono', ui-monospace, monospace;
+    --ease: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-spring: cubic-bezier(0.16, 1.16, 0.3, 1);
+    --shell-r: 2.25rem;
+    --core-r: calc(2.25rem - 0.4rem);
+    --pill-r: 1.5rem;
+    --pill-core: calc(1.5rem - 0.375rem);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+  /* ============ AMBIENT MESH ============ */
+  .mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .mesh::before, .mesh::after {
+    content: ''; position: absolute; border-radius: 50%; filter: blur(90px);
+    opacity: 0.18; will-change: transform;
+  }
+  .mesh::before {
+    width: 720px; height: 720px;
+    background: radial-gradient(circle at 30% 30%, var(--accent-glow), transparent 60%);
+    top: -180px; left: -160px;
+    animation: drift1 28s var(--ease) infinite alternate;
+  }
+  .mesh::after {
+    width: 560px; height: 560px;
+    background: radial-gradient(circle at 60% 60%, #D8B98E, transparent 60%);
+    top: 180px; right: -140px;
+    animation: drift2 36s var(--ease) infinite alternate;
+  }
+  @keyframes drift1 { from { transform: translate3d(0,0,0); } to { transform: translate3d(80px, 60px, 0); } }
+  @keyframes drift2 { from { transform: translate3d(0,0,0); } to { transform: translate3d(-60px, 40px, 0); } }
+  @media (prefers-reduced-motion: reduce) { .mesh::before, .mesh::after { animation: none; } }
+  main, header, footer { position: relative; z-index: 1; }
+
+  /* ============ FLOATING PILL NAV ============ */
+  .nav-shell {
+    position: sticky; top: 24px; z-index: 50;
+    margin: 24px auto 0; padding: 6px;
+    width: max-content; max-width: calc(100% - 56px);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.42);
+    backdrop-filter: saturate(160%) blur(22px);
+    -webkit-backdrop-filter: saturate(160%) blur(22px);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.45) inset,
+      0 0 0 1px rgba(10,10,10,0.05),
+      0 12px 36px -18px rgba(10,10,10,0.18);
+  }
+  .nav {
+    display: flex; align-items: center; gap: 18px;
+    padding: 6px 8px 6px 18px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.55);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  .nav .brand { font-weight: 800; font-size: 16px; letter-spacing: -0.025em; display: inline-flex; align-items: center; gap: 8px; }
+  .nav .brand-mark {
+    width: 22px; height: 22px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 1px 2px rgba(10,10,10,0.18);
+  }
+  .nav ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
+  .nav ul a {
+    display: inline-block; padding: 9px 14px; border-radius: 999px;
+    font-size: 14px; color: var(--ink-2); font-weight: 500;
+    text-decoration: none; opacity: 0.7;
+    transition: opacity 600ms var(--ease), background 600ms var(--ease);
+  }
+  .nav ul a:hover, .nav ul a.active { opacity: 1; background: rgba(10,10,10,0.05); }
+  .nav .me {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 4px 6px 4px 12px; margin-left: 6px;
+    border-radius: 999px; background: rgba(10,10,10,0.04);
+    font-size: 13px; font-weight: 500;
+  }
+  .nav .me .av {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+  }
+
+  /* ============ EYEBROW ============ */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.2em; font-weight: 500;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(10,10,10,0.04); border: 1px solid var(--hairline);
+    color: var(--muted);
+  }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .eyebrow.warn .dot { background: var(--warn); }
+  .eyebrow.rose .dot { background: var(--rose); }
+
+  /* ============ HERO ============ */
+  .hero { padding: 96px 0 80px; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 380px; gap: 48px; align-items: start; }
+  .hero h1 {
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.96; letter-spacing: -0.035em;
+    font-weight: 700; margin: 16px 0 22px;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(120deg, var(--accent) 0%, var(--accent-glow) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero .lede {
+    font-size: 18px; line-height: 1.55; max-width: 52ch;
+    color: var(--muted); font-weight: 400;
+  }
+  .hero .lede b { color: var(--ink); font-weight: 600; }
+  .hero-ctas { display: flex; gap: 12px; margin-top: 32px; }
+
+  /* CTA — button-in-button pill */
+  .btn-pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 6px 6px 6px 22px; border-radius: 999px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    color: #fff; background: var(--ink-2);
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 6px 20px -8px rgba(10,10,10,0.4);
+    cursor: pointer;
+    transition: transform 600ms var(--ease);
+  }
+  .btn-pill:active { transform: scale(0.98); }
+  .btn-pill .arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(255,255,255,0.12); margin-left: 6px;
+    transition: transform 700ms var(--ease);
+  }
+  .btn-pill:hover .arrow { transform: translate(2px, -1px) scale(1.05); }
+  .btn-pill.ghost {
+    background: rgba(10,10,10,0.04); color: var(--ink); border-color: var(--hairline);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(10,10,10,0.04);
+  }
+  .btn-pill.ghost .arrow { background: rgba(10,10,10,0.06); }
+
+  /* ============ DOUBLE-BEZEL CARD ============ */
+  .shell {
+    background: rgba(255,255,255,0.55);
+    border: 1px solid var(--hairline);
+    border-radius: var(--shell-r);
+    padding: 6px;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      0 20px 40px -22px rgba(10,10,10,0.08);
+  }
+  .core {
+    background: #FFF;
+    border-radius: var(--core-r);
+    padding: 24px 26px;
+  }
+  .shell.dim { background: rgba(255,255,255,0.42); }
+  .shell.dim .core { background: rgba(255,255,255,0.85); }
+
+  /* Hero capacity card */
+  .capacity-card .core { padding: 22px 24px; }
+  .capacity-card .meta {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .capacity-card .meta .l {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.18em; color: var(--muted-2);
+  }
+  .capacity-card .v {
+    font-size: 56px; font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+  }
+  .capacity-card .v small { font-size: 18px; font-weight: 500; color: var(--muted); margin-left: 6px; }
+  .capacity-card .sub { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .capacity-card .bar {
+    height: 8px; border-radius: 999px; background: rgba(10,10,10,0.06);
+    overflow: hidden; margin-top: 14px;
+  }
+  .capacity-card .bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent) 0%, var(--accent-glow) 100%);
+    border-radius: 999px;
+  }
+  .capacity-card .breakdown {
+    display: flex; gap: 10px; margin-top: 16px; padding-top: 16px;
+    border-top: 1px dashed var(--hairline);
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+  }
+  .capacity-card .breakdown b { color: var(--ink); font-weight: 600; }
+
+  /* ============ SECTIONS ============ */
+  section { padding: 96px 0; }
+  section.tighter { padding: 64px 0; }
+  .section-h {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 24px; margin-bottom: 28px;
+  }
+  .section-h h2 {
+    font-size: clamp(28px, 3.4vw, 44px);
+    letter-spacing: -0.025em; line-height: 1.05; font-weight: 700;
+    margin: 12px 0 0; max-width: 18ch;
+  }
+  .section-h .meta {
+    font-family: var(--mono); font-size: 11px; color: var(--muted);
+    text-align: right; line-height: 1.55;
+  }
+
+  /* ============ TASK ROW ============ */
+  .task-list { display: flex; flex-direction: column; gap: 14px; }
+  .task {
+    background: rgba(255,255,255,0.55);
+    border: 1px solid var(--hairline);
+    border-radius: var(--pill-r);
+    padding: 5px;
+    transition: transform 600ms var(--ease), box-shadow 600ms var(--ease);
+    cursor: pointer;
+    box-shadow: 0 8px 24px -16px rgba(10,10,10,0.06);
+  }
+  .task:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -22px rgba(10,10,10,0.12); }
+  .task .core {
+    background: #FFF;
+    border-radius: var(--pill-core);
+    padding: 18px 22px;
+    display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center;
+  }
+  .task .marker {
+    width: 8px; align-self: stretch; border-radius: 999px;
+  }
+  .task.urgent .marker { background: linear-gradient(180deg, var(--rose), #8E2733); }
+  .task.priority .marker { background: linear-gradient(180deg, var(--warn), #8B4D1B); }
+  .task.planned .marker { background: linear-gradient(180deg, var(--accent), var(--accent-glow)); }
+
+  .task .body .head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .task .body .nm { font-size: 18px; font-weight: 700; letter-spacing: -0.015em; }
+  .task .body .stage {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--muted);
+    padding: 3px 9px; border-radius: 999px;
+    background: rgba(10,10,10,0.04); border: 1px solid var(--hairline);
+  }
+  .task .body .deal {
+    font-family: var(--mono); font-size: 12px; color: var(--muted);
+    margin-left: auto;
+  }
+  .task .body .deal b { color: var(--ink); font-weight: 600; }
+  .task .body .ai {
+    font-size: 13px; color: var(--ink-2); line-height: 1.5;
+    margin-top: 6px; display: flex; gap: 8px; align-items: flex-start;
+  }
+  .task .body .ai b { font-weight: 600; }
+  .task .body .ai .ico {
+    flex-shrink: 0; font-family: var(--mono); font-size: 10px; padding: 3px 7px;
+    background: rgba(31,77,63,0.08); color: var(--accent); border-radius: 6px;
+    text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+    align-self: flex-start; margin-top: 1px;
+  }
+
+  .task .meta {
+    text-align: right; font-family: var(--mono); font-size: 11px; color: var(--muted-2);
+    white-space: nowrap;
+  }
+  .task .meta .t { font-size: 14px; color: var(--ink); font-weight: 600; display: block; margin-bottom: 2px; }
+
+  /* ============ BENTO KPIs ============ */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .bento .shell { padding: 5px; }
+  .bento .core {
+    padding: 22px 24px;
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 180px;
+  }
+  .bento .l {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.2em; color: var(--muted-2);
+  }
+  .bento .v {
+    font-size: 44px; font-weight: 800; letter-spacing: -0.035em;
+    line-height: 1; margin-top: auto;
+  }
+  .bento .v small { font-size: 16px; color: var(--muted); font-weight: 500; margin-left: 4px; }
+  .bento .delta {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    margin-top: 4px;
+  }
+  .bento .delta.warn { color: var(--warn); }
+
+  /* Wide bento card */
+  .bento .wide { grid-column: span 2; }
+  .bento .wide .core {
+    background: linear-gradient(135deg, #FFF 0%, #F5F2EE 100%);
+  }
+
+  /* ============ FEATURED LEAD ============ */
+  .featured-lead .core {
+    padding: 36px 40px;
+    display: grid; grid-template-columns: 280px 1fr; gap: 36px;
+    background: linear-gradient(180deg, #FFF 0%, #FAFAF8 100%);
+  }
+  .featured-lead .left {
+    border-right: 1px dashed var(--hairline);
+    padding-right: 36px;
+  }
+  .featured-lead .left h6 {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.18em; color: var(--muted-2);
+    margin: 0 0 6px;
+  }
+  .featured-lead .left .field {
+    margin-bottom: 18px; font-size: 14px; color: var(--ink-2);
+  }
+  .featured-lead .left .field b { font-weight: 600; }
+  .featured-lead .left .person {
+    background: rgba(10,10,10,0.03); border: 1px solid var(--hairline);
+    border-radius: 14px; padding: 10px 12px; margin-bottom: 6px;
+    font-size: 13px;
+  }
+  .featured-lead .left .person b { display: block; font-weight: 700; color: var(--ink); }
+  .featured-lead .left .person span { color: var(--muted); font-size: 12px; }
+
+  .featured-lead .right .head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 22px; gap: 24px;
+  }
+  .featured-lead .right h3 {
+    font-size: 36px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; margin: 8px 0 0;
+  }
+  .featured-lead .fit-score {
+    text-align: right;
+  }
+  .featured-lead .fit-score .num {
+    font-size: 64px; font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-glow) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .featured-lead .fit-score .num small { font-size: 22px; color: var(--muted); font-weight: 500; }
+  .featured-lead .fit-score .l {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.18em; color: var(--muted-2);
+  }
+  .featured-lead .verdict {
+    font-size: 16px; line-height: 1.55; color: var(--ink-2);
+    padding: 16px 20px; background: rgba(31,77,63,0.05);
+    border-radius: 18px; border: 1px solid rgba(31,77,63,0.1);
+    margin-bottom: 22px;
+  }
+  .featured-lead .verdict b { color: var(--accent); }
+  .featured-lead .signals {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 22px;
+  }
+  .featured-lead .signal {
+    padding: 10px 14px; border-radius: 14px;
+    background: rgba(10,10,10,0.03); border: 1px solid var(--hairline);
+    border-left: 3px solid var(--accent);
+    font-size: 13px; color: var(--ink-2);
+  }
+  .featured-lead .signal.risk { border-left-color: var(--rose); }
+  .featured-lead .signal .l {
+    font-family: var(--mono); font-size: 9px; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--muted-2); margin-bottom: 4px;
+    display: block;
+  }
+  .featured-lead .next-steps {
+    background: rgba(10,10,10,0.02); border: 1px solid var(--hairline);
+    border-radius: 18px; padding: 18px 22px;
+  }
+  .featured-lead .next-steps h6 {
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.18em; color: var(--muted-2); margin: 0 0 10px;
+  }
+  .featured-lead .next-steps .step {
+    display: flex; gap: 14px; padding: 8px 0;
+    border-bottom: 1px dashed var(--hairline);
+  }
+  .featured-lead .next-steps .step:last-child { border: none; }
+  .featured-lead .next-steps .num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--ink-2); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .featured-lead .next-steps .text { font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+  .featured-lead .next-steps .text b { font-weight: 600; }
+
+  /* ============ MARQUEE STRIP ============ */
+  .marquee-shell { padding: 28px 0 0; overflow: hidden; }
+  .marquee {
+    display: flex; gap: 56px;
+    animation: marquee 30s linear infinite;
+    width: max-content;
+  }
+  .marquee:hover { animation-play-state: paused; }
+  .marquee-item {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 700; letter-spacing: -0.015em;
+    color: var(--muted); white-space: nowrap;
+  }
+  .marquee-item .pill {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent); padding: 3px 8px;
+    background: rgba(31,77,63,0.08); border-radius: 999px;
+    font-weight: 500;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============ CLOSING BAND ============ */
+  .closing {
+    margin: 0; padding: 0;
+  }
+  .closing-inner {
+    background: linear-gradient(135deg, #18181B 0%, #2A2A2D 100%);
+    color: #fff; border-radius: var(--shell-r);
+    padding: 80px 64px;
+    margin: 0 28px;
+    position: relative; overflow: hidden;
+  }
+  .closing-inner::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 30%, var(--accent-glow), transparent 50%);
+    opacity: 0.25;
+  }
+  .closing-inner > * { position: relative; }
+  .closing h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1; letter-spacing: -0.035em;
+    font-weight: 700; max-width: 18ch; margin: 22px 0 18px;
+  }
+  .closing .lede { color: rgba(255,255,255,0.72); max-width: 52ch; font-size: 17px; line-height: 1.55; }
+  .closing .ctas { margin-top: 36px; display: flex; gap: 12px; }
+  .closing .btn-pill { background: #fff; color: var(--ink); }
+  .closing .btn-pill .arrow { background: rgba(10,10,10,0.06); }
+  .closing .eyebrow { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); color: rgba(255,255,255,0.7); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    margin-top: 80px; padding: 32px 28px 40px;
+    border-top: 1px solid var(--hairline);
+  }
+  footer .row { display: flex; justify-content: space-between; align-items: center; max-width: 1240px; margin: 0 auto; }
+  footer .meta { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  footer .meta a { color: var(--ink-2); text-decoration: none; border-bottom: 1px dashed var(--muted); }
+
+  /* Reveal animation */
+  [data-reveal] { transform: translateY(16px); filter: blur(8px); opacity: 0; transition: transform 900ms var(--ease), opacity 900ms var(--ease), filter 900ms var(--ease); }
+  [data-reveal].show { transform: translateY(0); filter: blur(0); opacity: 1; }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .featured-lead .core { grid-template-columns: 1fr; }
+    .featured-lead .left { border-right: none; padding-right: 0; border-bottom: 1px dashed var(--hairline); padding-bottom: 24px; }
+    .bento { grid-template-columns: repeat(2, 1fr); }
+    .bento .wide { grid-column: span 2; }
+    .featured-lead .signals { grid-template-columns: 1fr; }
+    .nav .me { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mesh"></div>
+
+<header>
+  <div class="nav-shell">
+    <nav class="nav">
+      <span class="brand"><span class="brand-mark"></span>drinkx<span style="color:var(--accent);font-weight:800;">.</span>crm</span>
+      <ul>
+        <li><a href="#today" class="active">Today</a></li>
+        <li><a href="#snapshot">Pipeline</a></li>
+        <li><a href="#featured">Лиды</a></li>
+        <li><a href="#segments">Сегменты</a></li>
+        <li><a href="index.html">Полный прототип →</a></li>
+      </ul>
+      <div class="me">
+        <span class="av">КП</span>
+        Кирилл
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="today">
+    <div class="hero-grid">
+      <div data-reveal>
+        <span class="eyebrow"><span class="dot"></span>ПЛАН НА 4 МАЯ · ПОНЕДЕЛЬНИК</span>
+        <h1>Доброе утро,<br><span class="grad">Кирилл</span>.</h1>
+        <p class="lede"><b>9 задач на сегодня</b> · 2 срочные требуют тебя в первой половине, остальное распределено по дню. AI пересчитал приоритеты в 8:00 — добавились свежие сигналы по <b>Магниту</b> и <b>Stars Coffee</b>.</p>
+        <div class="hero-ctas">
+          <a class="btn-pill" href="#urgent">Начать с срочного <span class="arrow">→</span></a>
+          <a class="btn-pill ghost" href="#snapshot">Pipeline overview <span class="arrow">↗</span></a>
+        </div>
+      </div>
+
+      <div class="capacity-card shell" data-reveal>
+        <div class="core">
+          <div class="meta">
+            <span class="l">Доступно</span>
+            <span class="l" style="color:var(--accent);">●  на работе</span>
+          </div>
+          <div class="v">6.5<small>часов</small></div>
+          <div class="sub">Загружено <b style="color:var(--ink);">5.2 ч</b> · буфер ~1 ч</div>
+          <div class="bar"><div class="bar-fill" style="width:80%;"></div></div>
+          <div class="breakdown">
+            <span><b>2</b> срочно</span><span>·</span>
+            <span><b>2</b> приоритет</span><span>·</span>
+            <span><b>5</b> план</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ URGENT TASKS ============ -->
+  <section id="urgent">
+    <div class="section-h" data-reveal>
+      <div>
+        <span class="eyebrow rose"><span class="dot"></span>СРОЧНО · ДЕЛАЙ ДО ОБЕДА</span>
+        <h2>2 карточки требуют тебя сейчас.</h2>
+      </div>
+      <div class="meta">~1 час<br>дедлайн сегодня</div>
+    </div>
+
+    <div class="task-list">
+
+      <div class="task urgent" data-reveal data-lead="stars-coffee">
+        <div class="core">
+          <div class="marker"></div>
+          <div class="body">
+            <div class="head">
+              <span class="nm">Stars Coffee</span>
+              <span class="stage">Переговоры</span>
+              <span class="deal"><b>₽4.5M</b> · 45 франшиз</span>
+            </div>
+            <div class="ai">
+              <span class="ico">AI</span>
+              <span><b>Звони сегодня:</b> закрывается тест с Магнитом по Red Stars кофе-to-go. Момент войти с предложением станций под план «45 франшиз к 2026». Контакт — Эрнесто Гонсалес (operations).</span>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="t">30 мин</span>
+            дедлайн<br>сегодня
+          </div>
+        </div>
+      </div>
+
+      <div class="task urgent" data-reveal>
+        <div class="core">
+          <div class="marker"></div>
+          <div class="body">
+            <div class="head">
+              <span class="nm">ВкусВилл</span>
+              <span class="stage">КП отправлено</span>
+              <span class="deal"><b>₽1.8M</b> · 15 точек</span>
+            </div>
+            <div class="ai">
+              <span class="ico">AI</span>
+              <span><b>Сменился категорийный менеджер</b> готовой еды 2 недели назад. Старое КП нерелевантно. Переотправь с новой повесткой — health-positioning.</span>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="t">30 мин</span>
+            обещано<br>вчера
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRIORITY ============ -->
+  <section class="tighter">
+    <div class="section-h" data-reveal>
+      <div>
+        <span class="eyebrow warn"><span class="dot"></span>ПРИОРИТЕТ · ЭТО НЕДЕЛЯ</span>
+        <h2>Ещё 2 карточки на твой день.</h2>
+      </div>
+      <div class="meta">~1 ч 45 м</div>
+    </div>
+
+    <div class="task-list">
+      <div class="task priority" data-reveal>
+        <div class="core">
+          <div class="marker"></div>
+          <div class="body">
+            <div class="head">
+              <span class="nm">Магнит</span>
+              <span class="stage">Согласование</span>
+              <span class="deal"><b>₽12M</b> · 50 точек pilot</span>
+            </div>
+            <div class="ai">
+              <span class="ico">AI</span>
+              <span><b>Ждёт КП 3 дня.</b> Drive Café (LUKOIL) активизировался — вчера пресс-релиз о расширении в HoReCa. Не тяни, отправь с ROI-кейсом по Stars Coffee.</span>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="t">45 мин</span>
+            rotting 3д
+          </div>
+        </div>
+      </div>
+
+      <div class="task priority" data-reveal>
+        <div class="core">
+          <div class="marker"></div>
+          <div class="body">
+            <div class="head">
+              <span class="nm">Дринкит</span>
+              <span class="stage">Новый лид</span>
+              <span class="deal"><b>₽3.2M</b> · 38 точек МСК</span>
+            </div>
+            <div class="ai">
+              <span class="ico">AI</span>
+              <span><b>Только что обогащено.</b> Сеть Дринкит — 38 точек в МСК, +12 за 2025. Команда из Х5. Высокий fit (8/10). Контакт через HR-страницу.</span>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="t">60 мин</span>
+            создан вчера
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PIPELINE SNAPSHOT (BENTO) ============ -->
+  <section id="snapshot">
+    <div class="section-h" data-reveal>
+      <div>
+        <span class="eyebrow"><span class="dot"></span>SNAPSHOT · ВЕСЬ PIPELINE</span>
+        <h2>131 клиент в воронке.<br>1.28 миллиарда в работе.</h2>
+      </div>
+      <div class="meta">обновлено <b style="color:var(--ink);">только что</b><br>команда из 3 менеджеров</div>
+    </div>
+
+    <div class="bento">
+      <div class="shell wide" data-reveal>
+        <div class="core">
+          <span class="l">Активные сделки</span>
+          <span class="v">96<small>из 131</small></span>
+          <span class="delta">+12 за неделю · 3 won, 2 lost закрыто</span>
+          <div style="margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted-2);font-family:var(--mono);">
+            <span>41 новые</span><span>·</span><span>30 квал</span><span>·</span><span>26 КП</span><span>·</span><span>19 переговоры</span><span>·</span><span>10 согл</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shell" data-reveal>
+        <div class="core">
+          <span class="l">В воронке</span>
+          <span class="v">₽1.28<small>млрд</small></span>
+          <span class="delta">avg deal ₽13.3M</span>
+        </div>
+      </div>
+
+      <div class="shell" data-reveal>
+        <div class="core">
+          <span class="l">Tier 1 · Priority A</span>
+          <span class="v">14<small>сделок</small></span>
+          <span class="delta">9 в активной работе</span>
+        </div>
+      </div>
+
+      <div class="shell wide" data-reveal>
+        <div class="core" style="background:linear-gradient(135deg, #FFF 0%, #F8E8E0 100%);">
+          <span class="l" style="color:var(--rose);">⚠️ Rotting · нужны действия</span>
+          <span class="v">45<small>карточек</small></span>
+          <span class="delta warn">17 в стадии «Переговоры» · 8 в «Согласование»</span>
+          <div style="margin-top:auto;font-size:12px;color:var(--muted);">AI рекомендует разобрать 5 наиболее горящих <a href="#" style="color:var(--rose);text-decoration:none;border-bottom:1px dashed var(--rose);">→ список</a></div>
+        </div>
+      </div>
+
+      <div class="shell" data-reveal>
+        <div class="core">
+          <span class="l">Конверсия команды</span>
+          <span class="v">28<small>% месяц</small></span>
+          <span class="delta">+4% к апрелю</span>
+        </div>
+      </div>
+
+      <div class="shell" data-reveal>
+        <div class="core">
+          <span class="l">AI cost · май</span>
+          <span class="v">$47<small>/$200</small></span>
+          <span class="delta">312 enrichments · cache 38%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED LEAD ============ -->
+  <section id="featured">
+    <div class="section-h" data-reveal>
+      <div>
+        <span class="eyebrow"><span class="dot"></span>СЕГОДНЯШНЯЯ КАРТОЧКА</span>
+        <h2>Stars Coffee.<br>Fit 9/10.</h2>
+      </div>
+      <div class="meta">обогащено 2 ч назад<br>14 источников · ₽0.18 enrichment</div>
+    </div>
+
+    <div class="featured-lead shell" data-reveal>
+      <div class="core">
+
+        <div class="left">
+          <h6>Компания</h6>
+          <div class="field"><b>ООО «Арена»</b><br>ИНН 9705131922</div>
+
+          <h6>Сегмент</h6>
+          <div class="field">Кофейни и кафе<br><span style="color:var(--muted);font-size:12px;">Tier 1 · Priority A</span></div>
+
+          <h6>Контакты ЛПР</h6>
+          <div class="person">
+            <b>Эрнесто Гонсалес</b>
+            <span>Управляющий партнёр · operations</span>
+          </div>
+          <div class="person">
+            <b>Антон Пинский</b>
+            <span>Совладелец, COO</span>
+          </div>
+          <div class="person">
+            <b>Соломатин Е.Ю.</b>
+            <span>Гендир ООО «Арена»</span>
+          </div>
+
+          <h6 style="margin-top:18px;">Ответственный</h6>
+          <div class="field"><b>Кирилл Перов</b> · Senior</div>
+        </div>
+
+        <div class="right">
+          <div class="head">
+            <div>
+              <span class="eyebrow"><span class="dot"></span>STARS COFFEE · ПЕРЕГОВОРЫ</span>
+              <h3>AI Brief</h3>
+            </div>
+            <div class="fit-score">
+              <div class="num">9<small>/10</small></div>
+              <div class="l">DrinkX fit</div>
+            </div>
+          </div>
+
+          <div class="verdict">
+            <b>Идеальный fit.</b> Растущая премиум-сеть, активная франчайзинговая экспансия, уже оценили кофе-to-go (тест с Магнитом). Высокая вероятность успешного пилота на новых точках.
+          </div>
+
+          <div class="signals">
+            <div class="signal">
+              <span class="l">📈 Рост</span>
+              +45 франшиз к 2026, удвоение сети, выход в Иорданию и Ирак
+            </div>
+            <div class="signal">
+              <span class="l">📈 Кофе-to-go</span>
+              Партнёрство с Магнит — Red Stars формат, прямой сигнал интереса
+            </div>
+            <div class="signal">
+              <span class="l">📈 Франшиза</span>
+              Инвестиции 12-19 млн ₽, оборудование 35-45% — нужны поставщики
+            </div>
+            <div class="signal risk">
+              <span class="l">⚠️ Риск</span>
+              Свой бренд блендов — не пытаться продать кофе как товар
+            </div>
+          </div>
+
+          <div class="next-steps">
+            <h6>🎬 Рекомендованные шаги от AI</h6>
+            <div class="step">
+              <div class="num">1</div>
+              <div class="text"><b>Связаться с Эрнесто Гонсалес сегодня.</b> Тест с Магнитом завершается на этой неделе — момент для предложения станций под «45 франшиз к 2026».</div>
+            </div>
+            <div class="step">
+              <div class="num">2</div>
+              <div class="text"><b>Подготовить ROI-кейс под франшизу.</b> Выручка с точки, скорость обслуживания, снижение нагрузки на бариста — релевантно их франчайзинговой модели.</div>
+            </div>
+            <div class="step">
+              <div class="num">3</div>
+              <div class="text"><b>Не предлагать кофе как продукт.</b> У них собственный бренд блендов — позиционировать DrinkX строго как технологию станций.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SEGMENTS MARQUEE ============ -->
+  <section class="tighter" id="segments">
+    <div class="section-h" data-reveal>
+      <div>
+        <span class="eyebrow"><span class="dot"></span>СЕГМЕНТЫ · 6 ГИПОТЕЗ</span>
+        <h2>Где ты работаешь сегодня.</h2>
+      </div>
+    </div>
+
+    <div class="marquee-shell">
+      <div class="marquee">
+        <div class="marquee-item">Кофейни и кафе <span class="pill">29 клиентов</span></div>
+        <div class="marquee-item">Продуктовый ритейл <span class="pill">22 клиента</span></div>
+        <div class="marquee-item">QSR / Fast Food <span class="pill">26 клиентов</span></div>
+        <div class="marquee-item">АЗС / road foodservice <span class="pill">20 клиентов</span></div>
+        <div class="marquee-item">Непродуктовый ритейл <span class="pill">24 клиента</span></div>
+        <div class="marquee-item">Дистрибьюторы <span class="pill">10 клиентов</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="marquee-item">Кофейни и кафе <span class="pill">29 клиентов</span></div>
+        <div class="marquee-item">Продуктовый ритейл <span class="pill">22 клиента</span></div>
+        <div class="marquee-item">QSR / Fast Food <span class="pill">26 клиентов</span></div>
+        <div class="marquee-item">АЗС / road foodservice <span class="pill">20 клиентов</span></div>
+        <div class="marquee-item">Непродуктовый ритейл <span class="pill">24 клиента</span></div>
+        <div class="marquee-item">Дистрибьюторы <span class="pill">10 клиентов</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ CLOSING BAND ============ -->
+<section class="closing">
+  <div class="closing-inner" data-reveal>
+    <span class="eyebrow"><span class="dot" style="background:var(--accent-glow);"></span>SMART AI CRM · PHASE 0</span>
+    <h2>Меньше времени на research.<br>Больше — на сделки.</h2>
+    <p class="lede">AI каждое утро готовит твой план: приоритизирует карточки, обновляет AI Brief, подсвечивает свежие сигналы. Менеджер открывает CRM — и сразу видит «делать вот это, по порядку».</p>
+    <div class="ctas">
+      <a class="btn-pill" href="index.html">Открыть полный прототип <span class="arrow">→</span></a>
+      <a class="btn-pill ghost" href="https://github.com/GlobalSasha/drinkx-crm-prototype" target="_blank" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.12);">GitHub <span class="arrow" style="background:rgba(255,255,255,0.12);">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <span class="meta">drinkx<span style="color:var(--accent);">.</span>crm · taste-soft preview · 2026</span>
+    <span class="meta"><a href="index.html">Прототип</a> · <a href="https://github.com/GlobalSasha/drinkx-crm-prototype" target="_blank">GitHub</a></span>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Update nav active state on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav ul a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      const top = s.offsetTop - 120;
+      if (window.scrollY >= top) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }, { passive: true });
+</script>
+
+</body>
+</html>
