@@ -5413,6 +5413,13 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     <span class="ds-btn" data-screen="onb-3">3</span>
     <span class="ds-btn" data-screen="onb-4">4</span>
   </div>
+  <div class="ds-row">
+    <span class="l">Scale:</span>
+    <span class="ds-btn active" data-scale="1">1×</span>
+    <span class="ds-btn" data-scale="5">5×</span>
+    <span class="ds-btn" data-scale="10">10×</span>
+    <span class="ds-btn" data-scale="20">20×</span>
+  </div>
   <div class="toggle" onclick="document.getElementById('demo-switch').classList.toggle('collapsed')">— свернуть —</div>
 </div>
 
@@ -6128,10 +6135,126 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     document.querySelectorAll('.panel-set').forEach(p => p.classList.toggle('active', p.dataset.setPanel === target));
   });
 
+  // ============ SCALE TEST MODE ============
+  const REGIONS = [
+    null,  // 1x = no suffix
+    '· Питер', '· Новосибирск', '· Екатеринбург', '· Казань',
+    '· Нижний Новгород', '· Челябинск', '· Самара', '· Ростов-на-Дону', '· Уфа',
+    '· Красноярск', '· Воронеж', '· Пермь', '· Волгоград', '· Краснодар',
+    '· Саратов', '· Тюмень', '· Тольятти', '· Ижевск', '· Иркутск',
+  ];
+
+  let _originalLeads = null;
+
+  function applyScale(multiplier) {
+    if (!window.REAL_DATA) return;
+    if (!_originalLeads) _originalLeads = window.REAL_DATA.leads.slice();
+
+    if (multiplier === 1) {
+      window.REAL_DATA.leads = _originalLeads.slice();
+    } else {
+      const out = _originalLeads.slice(); // include original (suffix=null)
+      for (let i = 1; i < multiplier; i++) {
+        const suffix = REGIONS[i] || `· Регион ${i}`;
+        const seed = i * 7919; // prime for variation
+        _originalLeads.forEach((l, idx) => {
+          const r = ((seed + idx * 13) % 100) / 100;  // pseudo-random 0..1 stable per (i, idx)
+          const stages = window.REAL_DATA.stages;
+          const stageShift = ['Новые лиды','Квалификация','КП отправлено','Переговоры','Согласование','Закрыто (won)','Закрыто (lost)'];
+          // 60% same stage, 40% redistribute earlier (region offices usually less mature)
+          let stage = l.stage;
+          if (r > 0.6) stage = stageShift[Math.min(Math.floor(r * 4), 3)];
+          // Vary deal amount 0.5x-1.2x
+          const dealMult = 0.5 + r * 0.7;
+          // Reassign manager pseudo-randomly
+          const mgrs = ['kirill','ivan','alexey'];
+          const mgr = mgrs[Math.floor(((seed + idx) % 30) / 10)];
+          // Vary activity
+          const lastAct = Math.floor(((seed + idx * 7) % 30));
+
+          out.push({
+            ...l,
+            id: l.id + '-r' + i,
+            company_name: l.company_name + ' ' + suffix,
+            deal_amount: Math.round(l.deal_amount * dealMult / 100000) * 100000,
+            stage,
+            assigned_to: mgr,
+            last_activity_days_ago: lastAct,
+            is_rotting: lastAct > 7 && !stage.startsWith('Закрыто'),
+            created_days_ago: l.created_days_ago + 30 + i * 5,
+          });
+        });
+      }
+      window.REAL_DATA.leads = out;
+    }
+
+    // Recompute stats
+    const D = window.REAL_DATA;
+    const by_stage = {}, by_seg = {}, by_tier = {};
+    let total_deal = 0, rotting = 0, active = 0;
+    D.leads.forEach(l => {
+      by_stage[l.stage] = (by_stage[l.stage] || 0) + 1;
+      by_seg[l.segment] = (by_seg[l.segment] || 0) + 1;
+      by_tier[l.tier] = (by_tier[l.tier] || 0) + 1;
+      if (!l.stage.startsWith('Закрыто')) { active++; total_deal += l.deal_amount; }
+      if (l.is_rotting) rotting++;
+    });
+    D.stats = { total: D.leads.length, active_total: active, deal_total: total_deal, rotting, by_stage, by_segment: by_seg, by_tier };
+
+    // Recompute managers
+    D.managers.forEach(m => {
+      const ml = D.leads.filter(l => l.assigned_to === m.id);
+      const am = ml.filter(l => !l.stage.startsWith('Закрыто'));
+      m.active_count = am.length;
+      m.load_pct = Math.round(am.length / m.max_active * 100);
+      m.deal_amount_total = am.reduce((s, l) => s + l.deal_amount, 0);
+      m.rotting_count = ml.filter(l => l.is_rotting).length;
+      m.won_count = ml.filter(l => l.stage === 'Закрыто (won)').length;
+    });
+
+    // Re-index leads_by_id
+    if (window.LEADS_BY_ID) {
+      Object.keys(window.LEADS_BY_ID).forEach(k => delete window.LEADS_BY_ID[k]);
+      D.leads.forEach(l => window.LEADS_BY_ID[l.id] = l);
+    }
+
+    // Re-render everything
+    if (typeof renderPipelineBoard === 'function') {
+      const segChip = document.querySelector('.pipe-filters .seg-chip.active');
+      renderPipelineBoard(segChip ? segChip.dataset.seg : 'all', document.getElementById('lead-search')?.value || '');
+      // Update segment chip counts in-place
+      document.querySelectorAll('.pipe-filters .seg-chip[data-seg]').forEach(chip => {
+        const seg = chip.dataset.seg;
+        if (seg === 'all') return;
+        const c = D.stats.by_segment[seg] || 0;
+        const SHORT = window.SHORT_SEG || { food_retail:'ритейл', non_food_retail:'non-food', coffee_shops:'кофейня', qsr_fast_food:'QSR', gas_stations:'АЗС', coffee_equipment_distributors:'дистр' };
+        chip.textContent = (SHORT[seg] || seg) + ' ' + c;
+      });
+      // Update stats line
+      const statsEl = document.querySelector('#screen-pipeline .pipe-top .stats');
+      if (statsEl) {
+        statsEl.innerHTML = `<b>${D.stats.active_total}</b> сделок · <b>${fmtMoney(D.stats.deal_total)}</b> в работе · <b>${D.stats.rotting}</b> rotting`;
+      }
+      const tier1 = document.getElementById('tier1-stat'); if (tier1) tier1.textContent = D.stats.by_tier['Tier 1'] || 0;
+      const rot = document.getElementById('rot-stat'); if (rot) rot.textContent = D.stats.rotting;
+    }
+    if (typeof renderTodayFromRealData === 'function') renderTodayFromRealData();
+    if (typeof renderTeamFromRealData === 'function') renderTeamFromRealData();
+
+    showToast(`Scale: ${multiplier}× · ${D.leads.length.toLocaleString('ru')} лидов · ${fmtMoney(D.stats.deal_total)} в работе`, 3500);
+  }
+
   // ============ DEMO STATE SWITCHER ============
   document.getElementById('demo-switch').addEventListener('click', e => {
     const btn = e.target.closest('.ds-btn');
     if (!btn) return;
+
+    // Scale switcher
+    if (btn.dataset.scale) {
+      document.querySelectorAll('.ds-btn[data-scale]').forEach(b => b.classList.toggle('active', b === btn));
+      applyScale(parseInt(btn.dataset.scale, 10));
+      return;
+    }
 
     // Role switcher
     if (btn.dataset.role) {
