@@ -5407,14 +5407,14 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     <span class="ds-btn" data-screen="webform">→ WebForm</span>
   </div>
   <div class="ds-row">
-    <span class="l">Onb:</span>
-    <span class="ds-btn" data-screen="onb-1">1</span>
-    <span class="ds-btn" data-screen="onb-2">2</span>
-    <span class="ds-btn" data-screen="onb-3">3</span>
-    <span class="ds-btn" data-screen="onb-4">4</span>
+    <span class="l">Онбординг:</span>
+    <span class="ds-btn" data-screen="onb-1" title="Шаг 1: Google OAuth / вход">1</span>
+    <span class="ds-btn" data-screen="onb-2" title="Шаг 2: настройка профиля и часов работы">2</span>
+    <span class="ds-btn" data-screen="onb-3" title="Шаг 3: подключение каналов (Email, Telegram)">3</span>
+    <span class="ds-btn" data-screen="onb-4" title="Шаг 4: готово, первые лиды">4</span>
   </div>
   <div class="ds-row">
-    <span class="l">Scale:</span>
+    <span class="l">Масштаб:</span>
     <span class="ds-btn active" data-scale="1">1×</span>
     <span class="ds-btn" data-scale="5">5×</span>
     <span class="ds-btn" data-scale="10">10×</span>
@@ -6251,8 +6251,14 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
 
     // Scale switcher
     if (btn.dataset.scale) {
+      console.log('[scale] clicked', btn.dataset.scale);
       document.querySelectorAll('.ds-btn[data-scale]').forEach(b => b.classList.toggle('active', b === btn));
-      applyScale(parseInt(btn.dataset.scale, 10));
+      try {
+        applyScale(parseInt(btn.dataset.scale, 10));
+      } catch (err) {
+        console.error('[scale] applyScale error:', err);
+        showToast('⚠️ Scale ошибка: ' + err.message, 5000);
+      }
       return;
     }
 
