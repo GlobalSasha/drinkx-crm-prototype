@@ -1,6 +1,9 @@
 # DrinkX CRM Prototype
 
-Кликабельный прототип для тестирования с менеджерами DrinkX.
+🌐 **Live:** https://globalsasha.github.io/drinkx-crm-prototype/
+
+Кликабельный прототип Smart AI CRM для DrinkX (Phase 0 deliverable).
+131 реальный клиент из drinkx-client-map с настоящим AI Brief, ЛПР, sales triggers.
 
 ## Файлы
 
