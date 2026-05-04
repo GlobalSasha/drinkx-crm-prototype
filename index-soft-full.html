@@ -42,7 +42,8 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; overflow: hidden; font-family: var(--sans); background: var(--bg-primary); color: var(--text-primary); -webkit-font-smoothing: antialiased; letter-spacing: -0.005em; }
+  html, body { min-height: 100%; font-family: var(--sans); background: var(--bg-primary); color: var(--text-primary); -webkit-font-smoothing: antialiased; letter-spacing: -0.005em; }
+  body { overflow-x: hidden; }
   a { color: inherit; text-decoration: none; cursor: pointer; }
   button { font-family: inherit; cursor: pointer; letter-spacing: -0.005em; }
 
@@ -56,11 +57,11 @@
   .app { position: relative; z-index: 1; }
 
   /* ============ APP SHELL ============ */
-  .app { display: grid; grid-template-columns: 220px 1fr; height: 100vh; }
+  .app { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
   .app.fullscreen { grid-template-columns: 1fr; }
   .app.fullscreen .side { display: none; }
 
-  /* SIDEBAR — taste-soft */
+  /* SIDEBAR — taste-soft (sticky) */
   .side {
     background: rgba(255,255,255,0.42);
     backdrop-filter: saturate(140%) blur(20px);
@@ -68,6 +69,10 @@
     border-right: 1px solid var(--border);
     padding: 22px 0; display: flex; flex-direction: column; gap: 4px; font-size: 13px;
     box-shadow: var(--hairline-inset);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    align-self: start;
   }
   .side .logo {
     padding: 4px 22px 22px; font-weight: 800; font-size: 17px;
@@ -119,7 +124,7 @@
   .side .me b { color: var(--text-primary); font-family: var(--sans); font-weight: 700; font-size: 13px; display: block; margin-bottom: 2px; }
 
   /* MAIN */
-  .main { overflow: hidden; display: flex; flex-direction: column; background: var(--bg-primary); }
+  .main { display: flex; flex-direction: column; background: var(--bg-primary); }
 
   /* SCREEN VISIBILITY */
   .screen { display: none; flex: 1; overflow: hidden; flex-direction: column; }
@@ -1501,7 +1506,7 @@
   .ai-banner .sig b { display: block; font-size: 12px; margin-bottom: 2px; }
   .ai-banner .sig small { color: var(--text-secondary); }
 
-  .board { flex: 1; overflow-x: auto; overflow-y: hidden; padding: 16px 28px; display: flex; gap: 12px; background: var(--bg-primary); }
+  .board { overflow-x: auto; overflow-y: visible; padding: 16px 28px; display: flex; gap: 12px; background: var(--bg-primary); align-items: flex-start; }
   .col { flex: 0 0 240px; background: var(--bg-tertiary); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; max-height: 100%; }
   .col-head { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px 10px; font-size: 12px; font-weight: 600; }
   .col-head .count { background: var(--bg-secondary); color: var(--text-secondary); font-size: 10px; padding: 2px 8px; border-radius: 999px; font-weight: 500; }
@@ -2011,8 +2016,9 @@
     border-radius: var(--r-xl);
     padding: 14px 12px;
     box-shadow: var(--hairline-inset);
-    height: 100%;
-    min-height: 0;
+    /* Each column constrained to viewport-relative max so very tall columns scroll internally,
+       while page itself can also scroll if other content overflows */
+    max-height: calc(100vh - 220px);
     display: flex;
     flex-direction: column;
   }
@@ -2530,6 +2536,56 @@
     box-shadow: 0 16px 40px -16px rgba(31,77,63,0.25);
   }
   .tip b { color: var(--accent); font-weight: 700; }
+
+  /* ============ CONTACT EDITING ============ */
+  .lc-left .person {
+    position: relative;
+    cursor: pointer;
+    transition: transform 600ms var(--ease), border-color 600ms var(--ease);
+  }
+  .lc-left .person:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent);
+  }
+  .lc-left .person .p-actions {
+    position: absolute; top: 8px; right: 8px;
+    display: none;
+  }
+  .lc-left .person:hover .p-actions { display: block; }
+  .lc-left .person .p-edit {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid var(--border);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    font-size: 11px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .lc-left .person .p-edit:hover { color: var(--accent); border-color: var(--accent); }
+  .lc-left .person.to-verify {
+    border-style: dashed;
+    background: rgba(10,10,10,0.02);
+  }
+
+  .contacts-h {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 18px 0 8px;
+  }
+  .add-contact-btn {
+    background: rgba(255,255,255,0.55);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 10px;
+    color: var(--accent);
+    font-family: var(--mono);
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 600ms var(--ease);
+  }
+  .add-contact-btn:hover { background: var(--accent-soft); }
 
 </style>
 </head>
@@ -5206,6 +5262,87 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
   </div>
 </div>
 
+<!-- ============ CONTACT EDIT MODAL ============ -->
+<div class="overlay" id="contact-overlay">
+  <div class="modal" style="width:520px;">
+    <div class="modal-h">
+      <h2 id="contact-modal-title">Редактировать ЛПР</h2>
+      <button class="close" data-close-contact>×</button>
+    </div>
+    <div class="form-body">
+      <div class="field-row">
+        <label>ФИО <span class="req">*</span></label>
+        <input id="c-name" placeholder="Имя Фамилия">
+      </div>
+      <div class="field-grid">
+        <div class="field-row">
+          <label>Должность</label>
+          <input id="c-title" placeholder="напр. Категорийный менеджер">
+        </div>
+        <div class="field-row">
+          <label>Роль для DrinkX</label>
+          <select id="c-role">
+            <option value="">—</option>
+            <option>owner</option>
+            <option>operations</option>
+            <option>procurement</option>
+            <option>category_manager</option>
+            <option>foodservice</option>
+            <option>partnerships</option>
+            <option>marketing</option>
+            <option>legal</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field-row">
+          <label>Email</label>
+          <input id="c-email" placeholder="x@company.ru">
+        </div>
+        <div class="field-row">
+          <label>Телефон / Telegram</label>
+          <input id="c-phone" placeholder="+7 ··· или @user">
+        </div>
+      </div>
+      <div class="field-row">
+        <label>LinkedIn URL</label>
+        <input id="c-linkedin" placeholder="https://linkedin.com/in/...">
+      </div>
+      <div class="field-grid">
+        <div class="field-row">
+          <label>Источник <span class="hint">где нашли</span></label>
+          <input id="c-source" placeholder="LinkedIn / website / Forbes">
+        </div>
+        <div class="field-row">
+          <label>Уверенность</label>
+          <select id="c-confidence">
+            <option value="">—</option>
+            <option>high</option>
+            <option>medium</option>
+            <option>low</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <label>Статус</label>
+        <select id="c-verified">
+          <option value="true">✓ Проверенный (в основной список)</option>
+          <option value="false">⏳ На проверку</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="left">
+        <button class="btn" id="contact-delete-btn" style="color:var(--error);display:none;">🗑 Удалить</button>
+      </span>
+      <div class="right">
+        <button class="btn" data-close-contact>Отмена</button>
+        <button class="btn primary" id="contact-save-btn">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ NOTIFICATIONS ============ -->
 <button class="notif-bell" id="notif-bell">
   🔔
@@ -6169,6 +6306,116 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     document.querySelectorAll('.panel-set').forEach(p => p.classList.toggle('active', p.dataset.setPanel === target));
   });
 
+  // ============ CONTACT EDITOR ============
+  const contactOverlay = document.getElementById('contact-overlay');
+  let _editingContact = null; // { leadId, idx | null }
+
+  function openContactEditor(leadId, idx, defaultBucket) {
+    if (!window.LEADS_BY_ID || !window.LEADS_BY_ID[leadId]) return;
+    const lead = window.LEADS_BY_ID[leadId];
+    if (!lead.contacts) lead.contacts = [];
+
+    _editingContact = { leadId, idx };
+    const isNew = idx === null || idx === undefined;
+    const c = isNew ? {} : (lead.contacts[idx] || {});
+
+    document.getElementById('contact-modal-title').textContent =
+      isNew ? '+ Новый контакт ЛПР' : 'Редактировать: ' + (c.name || 'ЛПР');
+    document.getElementById('c-name').value = c.name || '';
+    document.getElementById('c-title').value = c.title || '';
+    document.getElementById('c-role').value = c.role || '';
+    document.getElementById('c-email').value = c.email || '';
+    document.getElementById('c-phone').value = c.phone || '';
+    document.getElementById('c-linkedin').value = c.linkedin_url || '';
+    document.getElementById('c-source').value = c.source || '';
+    document.getElementById('c-confidence').value = c.confidence || '';
+    const verifiedDefault = isNew ? (defaultBucket !== 'to-verify') : !!c._verified;
+    document.getElementById('c-verified').value = verifiedDefault ? 'true' : 'false';
+    document.getElementById('contact-delete-btn').style.display = isNew ? 'none' : 'inline-block';
+    contactOverlay.classList.add('open');
+    setTimeout(() => document.getElementById('c-name').focus(), 50);
+  }
+
+  function closeContactEditor() {
+    contactOverlay.classList.remove('open');
+    _editingContact = null;
+  }
+
+  function saveContact() {
+    if (!_editingContact) return;
+    const { leadId, idx } = _editingContact;
+    const lead = window.LEADS_BY_ID && window.LEADS_BY_ID[leadId];
+    if (!lead) return;
+    const data = {
+      name: document.getElementById('c-name').value.trim(),
+      title: document.getElementById('c-title').value.trim(),
+      role: document.getElementById('c-role').value,
+      email: document.getElementById('c-email').value.trim(),
+      phone: document.getElementById('c-phone').value.trim(),
+      linkedin_url: document.getElementById('c-linkedin').value.trim(),
+      source: document.getElementById('c-source').value.trim(),
+      confidence: document.getElementById('c-confidence').value,
+      _verified: document.getElementById('c-verified').value === 'true',
+    };
+    if (!data.name) {
+      showToast('⚠ ФИО обязательно', 2400);
+      return;
+    }
+    if (!lead.contacts) lead.contacts = [];
+    if (idx === null || idx === undefined) {
+      lead.contacts.push(data);
+      showToast('✓ Контакт добавлен · ' + data.name, 2800);
+    } else {
+      lead.contacts[idx] = data;
+      showToast('✓ Сохранено · ' + data.name, 2400);
+    }
+    closeContactEditor();
+    if (typeof renderLeadCard === 'function') renderLeadCard(lead);
+  }
+
+  function deleteContact() {
+    if (!_editingContact) return;
+    const { leadId, idx } = _editingContact;
+    const lead = window.LEADS_BY_ID && window.LEADS_BY_ID[leadId];
+    if (!lead || !lead.contacts || idx == null) return;
+    const removed = lead.contacts.splice(idx, 1)[0];
+    showToast('🗑 Удалён · ' + (removed?.name || 'контакт'), 2400);
+    closeContactEditor();
+    if (typeof renderLeadCard === 'function') renderLeadCard(lead);
+  }
+
+  // Wire up clicks
+  document.addEventListener('click', e => {
+    if (e.target.matches('[data-close-contact]') || e.target === contactOverlay) {
+      closeContactEditor();
+      return;
+    }
+    const addBtn = e.target.closest('[data-add-contact]');
+    if (addBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      openContactEditor(addBtn.dataset.addContact, null, addBtn.dataset.bucket);
+      return;
+    }
+    const editIcon = e.target.closest('.p-edit');
+    const personEl = e.target.closest('.lc-left .person[data-contact-idx]');
+    if (editIcon && personEl) {
+      e.preventDefault();
+      e.stopPropagation();
+      openContactEditor(personEl.dataset.leadId, parseInt(personEl.dataset.contactIdx, 10));
+      return;
+    }
+    if (personEl && !e.target.closest('a')) {
+      // Clicking the card body opens edit too
+      e.preventDefault();
+      e.stopPropagation();
+      openContactEditor(personEl.dataset.leadId, parseInt(personEl.dataset.contactIdx, 10));
+      return;
+    }
+  });
+  document.getElementById('contact-save-btn').addEventListener('click', saveContact);
+  document.getElementById('contact-delete-btn').addEventListener('click', deleteContact);
+
   // ============ SCALE TEST MODE ============
   const REGIONS = [
     null,  // 1x = no suffix
@@ -6788,8 +7035,36 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
   function renderLeftCol(lead) {
     const left = document.querySelector('#screen-lead .lc-left');
     if (!left) return;
-    const dms = (lead.linkedin_contacts.length ? lead.linkedin_contacts : lead.decision_makers).slice(0, 5);
-    const verifyList = lead.people_to_verify || [];
+    // Use unified `contacts` list when present, otherwise build from existing
+    if (!lead.contacts) {
+      lead.contacts = [];
+      // Promote linkedin contacts (verified) first
+      (lead.linkedin_contacts || []).forEach(p => lead.contacts.push({ ...p, _verified: true }));
+      // Add decision_makers if not duplicate
+      (lead.decision_makers || []).forEach(p => {
+        if (!lead.contacts.some(x => (x.name || '').toLowerCase() === (p.name || '').toLowerCase())) {
+          lead.contacts.push({ ...p, _verified: true });
+        }
+      });
+      // Add people_to_verify
+      (lead.people_to_verify || []).forEach(p => lead.contacts.push({ ...p, _verified: false }));
+    }
+    const verified = lead.contacts.filter(c => c._verified);
+    const toVerify = lead.contacts.filter(c => !c._verified);
+
+    function personCard(p, idx) {
+      return `<div class="person${p._verified && idx === 0 ? ' active' : ''}${!p._verified ? ' to-verify' : ''}" data-contact-idx="${lead.contacts.indexOf(p)}" data-lead-id="${lead.id}">
+        <div class="p-actions">
+          <button class="p-edit" title="Редактировать" data-act="edit">✏</button>
+        </div>
+        <b>${escapeHtml(p.name || '—')}</b>
+        <span>${escapeHtml(p.title || p.role || '')}</span>
+        ${p.linkedin_url ? `<div class="channels"><a style="color:var(--accent);font-size:10px;" href="${p.linkedin_url}" target="_blank">LinkedIn</a></div>` : ''}
+        ${p.email ? `<div class="channels" style="font-size:10px;color:var(--text-tertiary);">📧 ${escapeHtml(p.email)}</div>` : ''}
+        ${p.phone ? `<div class="channels" style="font-size:10px;color:var(--text-tertiary);">📞 ${escapeHtml(p.phone)}</div>` : ''}
+      </div>`;
+    }
+
     left.innerHTML = `
       <h4>Компания</h4>
       <div class="field">${escapeHtml(lead.company_name)}</div>
@@ -6799,16 +7074,17 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
       <div class="field">${escapeHtml(lead.segment_label)}</div>
       <div class="field" style="font-size:11px;color:var(--text-secondary);">Tier: ${lead.tier} · Confidence: ${lead.confidence}</div>
 
-      <h4>Контакты ЛПР</h4>
-      ${dms.length ? dms.map((p, i) => `
-        <div class="person ${i === 0 ? 'active' : ''}">
-          <b>${escapeHtml(p.name || '')}</b>
-          <span>${escapeHtml(p.title || p.role || '')}</span>
-          ${p.linkedin_url ? `<div class="channels"><a style="color:var(--accent);font-size:10px;" href="${p.linkedin_url}" target="_blank">LinkedIn</a></div>` : ''}
-        </div>
-      `).join('') : '<div style="font-size:11px;color:var(--text-tertiary);">не найдены — нужно research</div>'}
+      <div class="contacts-h">
+        <h4 style="margin:0;">Контакты ЛПР</h4>
+        <button class="add-contact-btn" data-add-contact="${lead.id}" data-bucket="verified" title="Добавить контакт">+ Добавить</button>
+      </div>
+      ${verified.length ? verified.map((p, i) => personCard(p, i)).join('') : '<div style="font-size:11px;color:var(--text-tertiary);padding:6px 0;">не найдены — нужно research</div>'}
 
-      ${verifyList.length ? `<h4>На проверку</h4>${verifyList.slice(0, 3).map(p => `<div class="person" style="opacity:.7;border-style:dashed;"><b>${escapeHtml(p.name)}</b><span>${escapeHtml(p.title || p.role || '')}</span></div>`).join('')}` : ''}
+      <div class="contacts-h" style="margin-top:14px;">
+        <h4 style="margin:0;">На проверку</h4>
+        <button class="add-contact-btn" data-add-contact="${lead.id}" data-bucket="to-verify" title="Добавить">+</button>
+      </div>
+      ${toVerify.length ? toVerify.map((p, i) => personCard(p, i)).join('') : '<div style="font-size:11px;color:var(--text-tertiary);padding:6px 0;">пусто</div>'}
 
       <h4>Стадия</h4>
       <div class="field">${lead.stage}</div>
