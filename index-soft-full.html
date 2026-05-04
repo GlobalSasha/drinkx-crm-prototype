@@ -569,6 +569,26 @@
   .col .lead.compact .deal { font-size: 10px; }
   .col .lead.compact .ftr { font-size: 9px; }
 
+  /* Vertical scroll inside each column */
+  .col-scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 4px;
+    margin-right: -4px;
+    /* slim scrollbar */
+    scrollbar-width: thin;
+  }
+  .col-scroll::-webkit-scrollbar { width: 6px; }
+  .col-scroll::-webkit-scrollbar-track { background: transparent; }
+  .col-scroll::-webkit-scrollbar-thumb {
+    background: rgba(10,10,10,0.12);
+    border-radius: 999px;
+  }
+  .col-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(10,10,10,0.2);
+  }
+
   .col-overflow {
     text-align: center; padding: 8px; font-size: 11px;
     color: var(--text-tertiary); cursor: pointer;
@@ -1991,6 +2011,10 @@
     border-radius: var(--r-xl);
     padding: 14px 12px;
     box-shadow: var(--hairline-inset);
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
   .col-head { padding: 4px 8px 12px; font-weight: 700; font-size: 13px; letter-spacing: -0.01em; }
   .col-head .count {
@@ -6582,15 +6606,13 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
         return (b.fit_score - a.fit_score) || (b.deal_amount - a.deal_amount);
       });
       const totalDeal = sorted.reduce((s, l) => s + l.deal_amount, 0);
-      const visible = sorted.slice(0, 12);
-      const overflow = sorted.length > 12;
+      // Show all cards — column scrolls vertically
       const colBg = stage === 'Закрыто (won)' ? 'background:rgba(52,199,89,0.06);' : '';
 
       return `<div class="col" style="${colBg}">
         <div class="col-head">${stage}<span><span class="count">${cards.length}</span><span class="total">${fmtMoney(totalDeal)}</span></span></div>
         <div class="stage-bar" style="background:${colors[stage] || 'var(--text-tertiary)'};"></div>
-        ${visible.map(leadCardHtml).join('')}
-        ${overflow ? `<div class="col-overflow">+ ещё ${sorted.length - 12} · показать все →</div>` : ''}
+        <div class="col-scroll">${sorted.map(leadCardHtml).join('')}</div>
       </div>`;
     }).join('');
 
