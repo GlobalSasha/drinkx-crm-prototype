@@ -2563,6 +2563,76 @@
   }
   .tip b { color: var(--accent); font-weight: 700; }
 
+  /* ============ BRIEF DRAWER (Pipeline) ============ */
+  .brief-drawer {
+    position: fixed; top: 0; right: -540px; bottom: 0; width: 540px; max-width: 96vw;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(160%) blur(28px);
+    -webkit-backdrop-filter: saturate(160%) blur(28px);
+    border-left: 1px solid var(--border);
+    display: flex; flex-direction: column; z-index: 240;
+    transition: right 350ms var(--ease);
+    box-shadow: -10px 0 40px -10px rgba(10,10,10,0.18);
+    overflow: hidden;
+  }
+  .brief-drawer.open { right: 0; }
+  .brief-overlay {
+    position: fixed; inset: 0; background: rgba(10,10,10,0.18); z-index: 235;
+    display: none;
+    backdrop-filter: blur(2px);
+  }
+  .brief-overlay.open { display: block; }
+
+  .bd-head {
+    padding: 22px 28px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+  }
+  .bd-head .top { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-tertiary); margin-bottom: 6px; }
+  .bd-head h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .bd-head .meta {
+    font-family: var(--mono); font-size: 11px; color: var(--text-secondary);
+    margin-top: 8px; display: flex; gap: 14px; flex-wrap: wrap;
+  }
+  .bd-head .meta b { color: var(--text-primary); font-family: var(--sans); font-weight: 600; }
+  .bd-head .x {
+    background: rgba(10,10,10,0.05); border: none;
+    width: 32px; height: 32px; border-radius: 999px;
+    cursor: pointer; font-size: 16px; color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+  .bd-head .x:hover { background: rgba(10,10,10,0.08); }
+
+  .bd-body { flex: 1; overflow-y: auto; padding: 22px 28px 60px; }
+  .bd-body .ai-section { margin-bottom: 22px; }
+  .bd-body .verdict {
+    background: linear-gradient(135deg, rgba(31,77,63,0.06), rgba(216,185,142,0.04));
+    border: 1px solid rgba(31,77,63,0.15);
+    border-radius: var(--r-2xl);
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center;
+  }
+  .bd-body .verdict .num {
+    font-size: 48px; font-weight: 800; line-height: 1; letter-spacing: -0.04em;
+    background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .bd-body .verdict .num small {
+    font-size: 18px; -webkit-text-fill-color: var(--text-secondary);
+  }
+  .bd-body .verdict .l { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-tertiary); margin-bottom: 4px; }
+  .bd-body .verdict .verd-text { font-size: 14px; line-height: 1.5; }
+  .bd-body .verdict .verd-text b { color: var(--accent); }
+
+  .bd-foot {
+    padding: 16px 28px;
+    border-top: 1px solid var(--border);
+    background: rgba(255,255,255,0.6);
+    display: flex; justify-content: space-between; gap: 10px;
+  }
+  .bd-foot .btn { flex: 1; }
+
   /* ============ CONTACT EDITING ============ */
   .lc-left .person {
     position: relative;
@@ -5288,6 +5358,27 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
   </div>
 </div>
 
+<!-- ============ BRIEF DRAWER (Pipeline lead preview) ============ -->
+<div class="brief-overlay" id="brief-overlay"></div>
+<aside class="brief-drawer" id="brief-drawer">
+  <div class="bd-head">
+    <div>
+      <div class="top" id="bd-top">Pipeline · AI Brief</div>
+      <h2 id="bd-name">—</h2>
+      <div class="meta" id="bd-meta"></div>
+    </div>
+    <button class="x" id="bd-close" title="Закрыть (Esc)">×</button>
+  </div>
+  <div class="bd-body" id="bd-body">
+    <!-- filled by openBriefDrawer -->
+  </div>
+  <div class="bd-foot">
+    <button class="btn" id="bd-prev">← Предыдущий</button>
+    <button class="btn primary" id="bd-open-full">Открыть карточку полностью →</button>
+    <button class="btn" id="bd-next">Следующий →</button>
+  </div>
+</aside>
+
 <!-- ============ CONTACT EDIT MODAL ============ -->
 <div class="overlay" id="contact-overlay">
   <div class="modal" style="width:520px;">
@@ -6331,6 +6422,138 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     document.querySelectorAll('.settings-nav').forEach(n => n.classList.toggle('active', n === sn));
     document.querySelectorAll('.panel-set').forEach(p => p.classList.toggle('active', p.dataset.setPanel === target));
   });
+
+  // ============ BRIEF DRAWER ============
+  const briefDrawer = document.getElementById('brief-drawer');
+  const briefOverlay = document.getElementById('brief-overlay');
+  let _briefLeadId = null;
+
+  function getCurrentBoardLeads() {
+    // Returns leads currently visible on the board, in render order
+    const visibleIds = [];
+    document.querySelectorAll('#screen-pipeline .lead[data-real-lead]').forEach(el => visibleIds.push(el.dataset.realLead));
+    return visibleIds;
+  }
+
+  function openBriefDrawer(leadId) {
+    if (!window.LEADS_BY_ID) return;
+    const lead = window.LEADS_BY_ID[leadId];
+    if (!lead) return;
+    _briefLeadId = leadId;
+
+    const verdict = (typeof makeVerdict === 'function') ? makeVerdict(lead) : '';
+    const dms = (lead.contacts ? lead.contacts.filter(c => c._verified) : []).slice(0, 4);
+    const dmsLegacy = dms.length ? dms : (lead.linkedin_contacts || lead.decision_makers || []).slice(0, 4);
+    const triggers = (lead.sales_triggers || []).slice(0, 4);
+    const mgr = (window.REAL_DATA.managers.find(m => m.id === lead.assigned_to) || { name: '?' }).name;
+
+    document.getElementById('bd-top').textContent = `Pipeline · ${escapeHtml(lead.stage)} · ${lead.tier}`;
+    document.getElementById('bd-name').textContent = lead.company_name;
+    document.getElementById('bd-meta').innerHTML = `
+      <span><b>${fmtMoney(lead.deal_amount)}</b></span>
+      <span>${escapeHtml(lead.segment_label)}</span>
+      ${leadCities(lead).length ? `<span>📍 ${leadCities(lead).join(', ')}</span>` : ''}
+      <span>👤 ${escapeHtml(mgr)}</span>
+      ${lead.is_rotting ? `<span style="color:var(--error);">⚠ rotting ${lead.last_activity_days_ago}д</span>` : ''}
+    `;
+
+    document.getElementById('bd-body').innerHTML = `
+      <div class="verdict">
+        <div>
+          <div class="num">${lead.fit_score}<small>/10</small></div>
+          <div class="l" style="text-align:center;margin-top:4px;">DrinkX fit</div>
+        </div>
+        <div>
+          <div class="l">Вердикт</div>
+          <div class="verd-text">${verdict}</div>
+        </div>
+      </div>
+
+      <div class="ai-section">
+        <div class="h">🎬 Что делать сейчас</div>
+        <ol style="padding-left:20px;font-size:14px;line-height:1.6;">
+          ${lead.is_rotting ?
+            `<li><b>Сегодня:</b> Карточка rotting ${lead.last_activity_days_ago} дней. ${triggers[0] ? escapeHtml(triggers[0]) : 'Возобнови контакт.'}</li>` :
+            (triggers[0] ? `<li><b>Сегодня:</b> ${escapeHtml(triggers[0])}</li>` : '')
+          }
+          ${lead.entry_route ? `<li><b>Точка входа:</b> ${escapeHtml(lead.entry_route).slice(0, 200)}</li>` : ''}
+          ${triggers[1] ? `<li><b>Дальше:</b> ${escapeHtml(triggers[1])}</li>` : ''}
+          ${triggers[2] ? `<li><b>Потом:</b> ${escapeHtml(triggers[2])}</li>` : ''}
+        </ol>
+      </div>
+
+      ${lead.coffee_signals ? `<div class="ai-section">
+        <div class="h">☕ Кофе / foodservice сигналы</div>
+        <p style="font-size:13px;line-height:1.55;">${escapeHtml(lead.coffee_signals).slice(0, 300)}${lead.coffee_signals.length > 300 ? '…' : ''}</p>
+      </div>` : ''}
+
+      ${dmsLegacy.length ? `<div class="ai-section">
+        <div class="h">🎯 Контакты ЛПР (${dmsLegacy.length})</div>
+        ${dmsLegacy.map(p => `<div style="padding:8px 0;border-bottom:1px dashed var(--border);font-size:13px;">
+          <b>${escapeHtml(p.name || '—')}</b> — <span style="color:var(--text-secondary);">${escapeHtml(p.title || p.role || '')}</span>
+          ${p.linkedin_url ? `<br><a href="${p.linkedin_url}" target="_blank" style="color:var(--accent);font-size:11px;">LinkedIn ↗</a>` : ''}
+        </div>`).join('')}
+      </div>` : ''}
+
+      ${lead.network_scale ? `<div class="ai-section">
+        <div class="h">📏 Масштаб</div>
+        <p style="font-size:13px;line-height:1.55;">${escapeHtml(lead.network_scale).slice(0, 250)}</p>
+      </div>` : ''}
+
+      ${triggers.length ? `<div class="ai-section">
+        <div class="h">📊 Sales triggers</div>
+        <ul style="font-size:13px;line-height:1.6;padding-left:20px;">
+          ${triggers.map(t => `<li>${escapeHtml(typeof t === 'string' ? t : (t.text || ''))}</li>`).join('')}
+        </ul>
+      </div>` : ''}
+    `;
+
+    briefDrawer.classList.add('open');
+    briefOverlay.classList.add('open');
+  }
+
+  function closeBriefDrawer() {
+    briefDrawer.classList.remove('open');
+    briefOverlay.classList.remove('open');
+    _briefLeadId = null;
+  }
+
+  function navBriefDrawer(dir) {
+    if (!_briefLeadId) return;
+    const ids = getCurrentBoardLeads();
+    const idx = ids.indexOf(_briefLeadId);
+    if (idx < 0) return;
+    const next = ids[(idx + dir + ids.length) % ids.length];
+    if (next) openBriefDrawer(next);
+  }
+
+  briefOverlay.addEventListener('click', closeBriefDrawer);
+  document.getElementById('bd-close').addEventListener('click', closeBriefDrawer);
+  document.getElementById('bd-prev').addEventListener('click', () => navBriefDrawer(-1));
+  document.getElementById('bd-next').addEventListener('click', () => navBriefDrawer(1));
+  document.getElementById('bd-open-full').addEventListener('click', () => {
+    const id = _briefLeadId;
+    closeBriefDrawer();
+    if (id) showLead(id);
+  });
+  document.addEventListener('keydown', e => {
+    if (!briefDrawer.classList.contains('open')) return;
+    if (e.key === 'Escape') closeBriefDrawer();
+    if (e.key === 'ArrowLeft') navBriefDrawer(-1);
+    if (e.key === 'ArrowRight') navBriefDrawer(1);
+  });
+
+  // Intercept clicks on Pipeline leads → open brief drawer instead of full screen
+  document.addEventListener('click', e => {
+    const onPipeline = document.getElementById('screen-pipeline')?.classList.contains('active');
+    if (!onPipeline) return;
+    const lead = e.target.closest('#screen-pipeline .lead[data-real-lead]');
+    if (!lead) return;
+    if (e.target.closest('a, button')) return; // let other interactions through
+    e.preventDefault();
+    e.stopPropagation();
+    openBriefDrawer(lead.dataset.realLead);
+  }, true);
 
   // ============ CONTACT EDITOR ============
   const contactOverlay = document.getElementById('contact-overlay');
