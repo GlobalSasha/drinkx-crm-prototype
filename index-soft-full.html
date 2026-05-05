@@ -2563,6 +2563,265 @@
   }
   .tip b { color: var(--accent); font-weight: 700; }
 
+  /* ============ ACTIVITY FEED ============ */
+  .feed-shell { display: flex; flex-direction: column; gap: 22px; }
+
+  /* Follow-up stages section */
+  .followups {
+    background: rgba(255,255,255,0.55);
+    border: 1px solid var(--border);
+    border-radius: var(--r-2xl);
+    padding: 22px 26px;
+    box-shadow: var(--hairline-inset);
+  }
+  .followups-h {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px;
+  }
+  .followups-h h4 {
+    font-size: 14px; font-weight: 700; letter-spacing: -0.015em;
+    text-transform: none; color: var(--text-primary); margin: 0;
+    font-family: var(--sans);
+  }
+  .followups-h .add-stage-btn {
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid rgba(31,77,63,0.2);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--mono); letter-spacing: 0.06em;
+  }
+  .followups-h .add-stage-btn:hover { background: rgba(31,77,63,0.15); }
+
+  .stage-track {
+    position: relative;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .stage-track::before {
+    content: ''; position: absolute;
+    left: 11px; top: 14px; bottom: 14px; width: 2px;
+    background: linear-gradient(180deg, var(--accent), rgba(31,77,63,0.15));
+  }
+
+  .stage-item {
+    display: grid; grid-template-columns: 24px 1fr auto; gap: 14px;
+    padding: 10px 0; align-items: flex-start;
+    position: relative;
+  }
+  .stage-item .marker {
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    z-index: 2;
+    border: 2px solid var(--canvas, #F2F2F0);
+  }
+  .stage-item.done .marker { background: var(--success); color: #FFF; }
+  .stage-item.active .marker { background: var(--accent); color: #FFF; box-shadow: 0 0 0 4px rgba(31,77,63,0.2); }
+  .stage-item.pending .marker { background: rgba(10,10,10,0.06); color: var(--text-tertiary); }
+  .stage-item.overdue .marker { background: var(--error); color: #FFF; }
+
+  .stage-item .body { font-size: 14px; line-height: 1.4; }
+  .stage-item .body .nm { font-weight: 600; color: var(--text-primary); }
+  .stage-item .body .meta {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--text-tertiary); letter-spacing: 0.06em;
+    text-transform: uppercase; margin-top: 2px;
+  }
+  .stage-item .body .meta b { color: var(--text-secondary); font-family: var(--mono); font-weight: 600; }
+  .stage-item.overdue .body .meta { color: var(--error); }
+  .stage-item.done .body { opacity: 0.7; }
+  .stage-item.done .body .nm { text-decoration: line-through; }
+
+  .stage-item .actions {
+    display: flex; gap: 4px;
+  }
+  .stage-item .actions button {
+    background: transparent; border: 1px solid transparent;
+    width: 28px; height: 28px; border-radius: 999px;
+    font-size: 11px; cursor: pointer; color: var(--text-tertiary);
+  }
+  .stage-item .actions button:hover { background: rgba(10,10,10,0.04); color: var(--text-primary); border-color: var(--border); }
+
+  /* Activity composer */
+  .composer {
+    background: #FFF;
+    border: 1px solid var(--border);
+    border-radius: var(--r-2xl);
+    padding: 14px 18px;
+    box-shadow: var(--shadow-soft);
+  }
+  .composer-tabs {
+    display: flex; gap: 4px; margin-bottom: 12px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .composer-tabs .ct {
+    padding: 6px 14px;
+    background: rgba(10,10,10,0.04);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 12px; cursor: pointer; user-select: none;
+    color: var(--text-secondary); font-weight: 500;
+    transition: all 600ms var(--ease);
+  }
+  .composer-tabs .ct.active { background: var(--accent); color: #FFF; border-color: var(--accent); }
+  .composer-tabs .ct:not(.active):hover { background: rgba(10,10,10,0.06); color: var(--text-primary); }
+  .composer textarea {
+    width: 100%;
+    background: rgba(10,10,10,0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 12px 14px; font-size: 14px;
+    color: var(--text-primary); font-family: var(--sans);
+    resize: vertical; min-height: 70px;
+    transition: border-color 600ms var(--ease), background 600ms var(--ease);
+  }
+  .composer textarea:focus {
+    outline: none; border-color: var(--accent);
+    background: #FFF;
+  }
+
+  .composer-meta {
+    display: none; margin-top: 12px; gap: 10px;
+    flex-wrap: wrap; align-items: center;
+  }
+  .composer-meta.show { display: flex; }
+  .composer-meta input, .composer-meta select {
+    background: rgba(10,10,10,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 7px 12px; font-size: 13px;
+    color: var(--text-primary); font-family: var(--sans);
+  }
+  .composer-meta label {
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--text-tertiary); font-weight: 500;
+  }
+
+  .composer-foot {
+    display: flex; justify-content: space-between; margin-top: 12px; align-items: center;
+  }
+  .composer-foot .left {
+    display: flex; gap: 8px; font-size: 12px; color: var(--text-tertiary);
+  }
+  .composer-foot .left button {
+    background: rgba(10,10,10,0.04); border: 1px solid var(--border);
+    border-radius: 999px; padding: 5px 12px; font-size: 11px;
+    color: var(--text-secondary); cursor: pointer;
+    font-family: var(--mono); letter-spacing: 0.06em;
+  }
+  .composer-foot .left button:hover { color: var(--accent); border-color: var(--accent); }
+  .composer-foot .send {
+    background: var(--accent); color: #FFF; border: none;
+    border-radius: 999px; padding: 8px 18px; font-size: 13px; font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px -4px rgba(31,77,63,0.4);
+  }
+
+  /* Activity items */
+  .feed { display: flex; flex-direction: column; gap: 10px; }
+  .feed-h {
+    display: flex; gap: 6px; align-items: center; margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .feed-h .filter-chip {
+    background: rgba(10,10,10,0.04); border: 1px solid var(--border);
+    border-radius: 999px; padding: 4px 10px; font-size: 11px;
+    color: var(--text-secondary); cursor: pointer; user-select: none;
+    font-family: var(--mono); letter-spacing: 0.06em;
+  }
+  .feed-h .filter-chip.active { background: var(--accent); color: #FFF; border-color: var(--accent); }
+
+  .activity-item {
+    background: #FFF;
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 14px 18px;
+    display: grid; grid-template-columns: 36px 1fr auto;
+    gap: 14px; align-items: flex-start;
+    transition: border-color 600ms var(--ease);
+  }
+  .activity-item:hover { border-color: rgba(10,10,10,0.18); }
+  .activity-item .ico {
+    width: 36px; height: 36px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .activity-item.comment .ico { background: rgba(10,10,10,0.06); color: var(--text-secondary); }
+  .activity-item.task .ico { background: var(--warning-soft); color: var(--warning); }
+  .activity-item.task.done .ico { background: rgba(45,122,90,0.12); color: var(--success); }
+  .activity-item.reminder .ico { background: var(--accent-soft); color: var(--accent); }
+  .activity-item.file .ico { background: rgba(175,82,222,0.10); color: #884BBF; }
+  .activity-item.system .ico { background: rgba(10,10,10,0.04); color: var(--text-tertiary); }
+  .activity-item.email .ico { background: var(--warning-soft); color: var(--warning); }
+  .activity-item.tg .ico { background: var(--accent-soft); color: var(--accent); }
+
+  .activity-item .body { min-width: 0; }
+  .activity-item .head {
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+    font-size: 12px; color: var(--text-secondary);
+    font-family: var(--mono); letter-spacing: 0;
+  }
+  .activity-item .head b {
+    color: var(--text-primary); font-family: var(--sans);
+    font-weight: 600; font-size: 13px;
+  }
+  .activity-item .head .badge {
+    font-size: 9px; padding: 2px 7px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600;
+  }
+  .activity-item .head .badge.auto { background: var(--accent-soft); color: var(--accent); }
+  .activity-item .head .badge.due { background: var(--warning-soft); color: var(--warning); }
+  .activity-item .head .badge.overdue { background: var(--error-soft); color: var(--error); }
+  .activity-item .head .badge.done { background: rgba(45,122,90,0.12); color: var(--success); }
+
+  .activity-item .content {
+    margin-top: 6px; font-size: 14px; line-height: 1.55; color: var(--text-primary);
+    word-wrap: break-word;
+  }
+  .activity-item .content b { font-weight: 600; }
+
+  .activity-item.task .task-title {
+    font-size: 14px; font-weight: 600; color: var(--text-primary);
+  }
+  .activity-item.task.done .task-title { text-decoration: line-through; opacity: 0.6; }
+  .activity-item.task .task-meta {
+    margin-top: 6px; font-family: var(--mono); font-size: 11px; color: var(--text-secondary);
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+
+  .activity-item .file-attach {
+    margin-top: 8px; padding: 10px 12px;
+    background: rgba(175,82,222,0.05);
+    border: 1px solid rgba(175,82,222,0.15);
+    border-radius: var(--r-lg);
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px;
+  }
+  .activity-item .file-attach .filename { font-weight: 600; }
+  .activity-item .file-attach .filesize { color: var(--text-tertiary); font-family: var(--mono); }
+  .activity-item .file-attach a { color: #884BBF; margin-left: auto; }
+
+  .activity-item .item-actions {
+    display: flex; gap: 4px;
+    align-self: flex-start;
+  }
+  .activity-item .item-actions button {
+    width: 28px; height: 28px; border-radius: 999px;
+    background: transparent; border: none;
+    color: var(--text-tertiary); cursor: pointer; font-size: 12px;
+  }
+  .activity-item .item-actions button:hover { background: rgba(10,10,10,0.04); color: var(--text-primary); }
+
+  /* Date dividers in feed */
+  .feed-divider {
+    text-align: center; font-family: var(--mono);
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--text-tertiary); padding: 8px 0; font-weight: 500;
+  }
+
   /* ============ BRIEF DRAWER (Pipeline) ============ */
   .brief-drawer {
     position: fixed; top: 0; right: -540px; bottom: 0; width: 540px; max-width: 96vw;
@@ -3148,17 +3407,9 @@
             </div>
           </div>
 
-          <!-- ACTIVITIES -->
-          <div class="panel" data-panel="activities">
-            <div class="timeline">
-              <div class="tl-item"><div class="when">2 ч назад</div><div>💙 Telegram сообщение от <b>Эрнесто Гонсалес</b> «Когда сможете заехать на демо?»</div></div>
-              <div class="tl-item"><div class="when">Вчера 14:23</div><div>📧 Email отправлен <b>Эрнесто Гонсалес</b>: «Re: Кофейные станции для франшизы»</div></div>
-              <div class="tl-item"><div class="when">Вчера 11:00</div><div>📋 Активность: <b>звонок 30 мин</b> с Эрнесто, обсудили ROI</div></div>
-              <div class="tl-item"><div class="when">28 апр</div><div>🤖 AI обогащение: добавлены 2 ЛПР, обновлён fit_score → 9/10</div></div>
-              <div class="tl-item"><div class="when">25 апр</div><div>🔄 Переход в стадию <b>Переговоры</b> · автор: Кирилл</div></div>
-              <div class="tl-item"><div class="when">15 апр</div><div>📧 Первое письмо от Эрнесто: запрос каталога</div></div>
-              <div class="tl-item"><div class="when">12 апр</div><div>➕ Лид создан · источник: Партнёрская страница</div></div>
-            </div>
+          <!-- ACTIVITIES — рендерится динамически через renderActivityFeed(lead) -->
+          <div class="panel" data-panel="activities" id="activity-panel">
+            <!-- filled by JS -->
           </div>
 
         </section>
@@ -7323,6 +7574,10 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
 
     // Update left column contacts
     renderLeftCol(lead);
+
+    // Track current lead for activity feed
+    window._currentLead = lead;
+    renderActivityFeed(lead);
   }
 
   function makeVerdict(lead) {
@@ -7394,6 +7649,443 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     `;
   }
 
+  // ========== ACTIVITY FEED + FOLLOW-UPS ==========
+  function ensureActivity(lead) {
+    if (!lead._activity) {
+      // Seed default activity from lead state
+      lead._activity = [];
+      const now = Date.now();
+      const day = 86400000;
+      // 1. Lead created
+      lead._activity.push({
+        id: 'sys-' + Math.random().toString(36).slice(2),
+        type: 'system',
+        ts: now - lead.created_days_ago * day,
+        text: `➕ Лид создан · источник: ${lead.tier === 'Tier 1' ? 'priority A research' : 'CRM база'}`,
+      });
+      // 2. AI enrichment
+      if (lead.fit_score) {
+        lead._activity.push({
+          id: 'sys-' + Math.random().toString(36).slice(2),
+          type: 'system',
+          ts: now - Math.max(1, Math.floor(lead.created_days_ago / 2)) * day,
+          text: `🤖 AI Brief обогащён · fit_score ${lead.fit_score}/10 · добавлены ЛПР, sales triggers`,
+        });
+      }
+      // 3. Stage transition (if not in Новые лиды)
+      if (lead.stage !== 'Новые лиды') {
+        lead._activity.push({
+          id: 'sys-' + Math.random().toString(36).slice(2),
+          type: 'system',
+          ts: now - Math.max(1, lead.last_activity_days_ago + 2) * day,
+          text: `🔄 Переход в стадию <b>${lead.stage}</b> · автор: Кирилл`,
+        });
+      }
+      // 4. Last activity (mock)
+      if (lead.last_activity_days_ago < 7) {
+        lead._activity.push({
+          id: 'comm-' + Math.random().toString(36).slice(2),
+          type: 'comment',
+          author: 'Кирилл Перов',
+          ts: now - lead.last_activity_days_ago * day,
+          text: `Связался с ${(lead.contacts || lead.linkedin_contacts || lead.decision_makers || [{name:'ЛПР'}])[0]?.name || 'ЛПР'}, обсудили возможность пилота. Готовы получить КП — обещали ответить на этой неделе.`,
+        });
+      }
+    }
+    if (!lead._followups) {
+      // Seed default follow-up sequence based on stage
+      const now = Date.now();
+      const day = 86400000;
+      const since = (n) => now - n * day;
+      const future = (n) => now + n * day;
+
+      if (lead.stage === 'Новые лиды') {
+        lead._followups = [
+          { id: 'fu-1', name: 'Первый контакт', due: future(1), status: 'active', reminder: 'manager', notes: 'Первый звонок — представиться, узнать боли' },
+          { id: 'fu-2', name: 'Квалификация', due: future(4), status: 'pending', reminder: 'manager' },
+          { id: 'fu-3', name: 'Отправка КП', due: future(10), status: 'pending', reminder: 'manager' },
+        ];
+      } else if (lead.stage === 'Квалификация') {
+        lead._followups = [
+          { id: 'fu-1', name: 'Первый контакт', due: since(7), status: 'done' },
+          { id: 'fu-2', name: 'Discovery-звонок', due: since(2), status: 'done' },
+          { id: 'fu-3', name: 'Отправить КП', due: future(2), status: 'active', reminder: 'manager' },
+          { id: 'fu-4', name: 'Follow-up по КП', due: future(6), status: 'pending', reminder: 'auto_email', notes: 'Auto-email через 5 дней если нет ответа' },
+        ];
+      } else if (lead.stage === 'КП отправлено') {
+        const overdue = lead.is_rotting;
+        lead._followups = [
+          { id: 'fu-1', name: 'Первый контакт', due: since(15), status: 'done' },
+          { id: 'fu-2', name: 'Discovery', due: since(10), status: 'done' },
+          { id: 'fu-3', name: 'КП отправлено', due: since(5), status: 'done' },
+          { id: 'fu-4', name: 'Follow-up по КП', due: overdue ? since(2) : future(1), status: overdue ? 'overdue' : 'active', reminder: 'manager', notes: 'Спросить впечатление от КП, ответить на вопросы' },
+          { id: 'fu-5', name: 'Назначить демо', due: future(7), status: 'pending', reminder: 'manager' },
+        ];
+      } else if (lead.stage === 'Переговоры') {
+        lead._followups = [
+          { id: 'fu-1', name: 'Первый контакт', due: since(25), status: 'done' },
+          { id: 'fu-2', name: 'КП отправлено', due: since(12), status: 'done' },
+          { id: 'fu-3', name: 'Демо проведено', due: since(5), status: 'done' },
+          { id: 'fu-4', name: 'Согласовать условия', due: future(2), status: 'active', reminder: 'manager' },
+          { id: 'fu-5', name: 'Подписание', due: future(10), status: 'pending', reminder: 'auto_email' },
+        ];
+      } else if (lead.stage === 'Согласование') {
+        lead._followups = [
+          { id: 'fu-1', name: 'КП согласовано', due: since(20), status: 'done' },
+          { id: 'fu-2', name: 'Условия утверждены', due: since(7), status: 'done' },
+          { id: 'fu-3', name: 'Договор отправлен', due: since(2), status: 'done' },
+          { id: 'fu-4', name: 'Подписание', due: future(3), status: 'active', reminder: 'auto_email', notes: 'Напомнить про подпись через 3 дня' },
+          { id: 'fu-5', name: 'Старт пилота', due: future(14), status: 'pending', reminder: 'manager' },
+        ];
+      } else {
+        // Closed — no followups
+        lead._followups = [];
+      }
+    }
+  }
+
+  function fmtTimeAgo(ts) {
+    const d = (Date.now() - ts) / 1000;
+    if (d < 60) return 'только что';
+    if (d < 3600) return Math.floor(d / 60) + ' мин назад';
+    if (d < 86400) return Math.floor(d / 3600) + ' ч назад';
+    if (d < 86400 * 7) return Math.floor(d / 86400) + ' д назад';
+    return new Date(ts).toLocaleDateString('ru', { day: 'numeric', month: 'short' });
+  }
+  function fmtDateShort(ts) {
+    return new Date(ts).toLocaleDateString('ru', { day: 'numeric', month: 'short' });
+  }
+
+  function renderActivityFeed(lead) {
+    const panel = document.getElementById('activity-panel');
+    if (!panel) return;
+    ensureActivity(lead);
+    const fus = lead._followups || [];
+    const acts = (lead._activity || []).slice().sort((a, b) => b.ts - a.ts);
+    const filter = panel.dataset.filter || 'all';
+
+    // Build follow-ups section
+    const fusHtml = fus.length ? `
+      <div class="followups">
+        <div class="followups-h">
+          <h4>📍 Этапы воронки и напоминания</h4>
+          <button class="add-stage-btn" data-add-stage="${lead.id}">+ этап</button>
+        </div>
+        <div class="stage-track">
+          ${fus.map(f => {
+            const overdue = f.status === 'overdue' || (f.status !== 'done' && f.due < Date.now() - 86400000);
+            const statusCls = f.status === 'done' ? 'done' : (overdue ? 'overdue' : (f.status === 'active' ? 'active' : 'pending'));
+            const marker = f.status === 'done' ? '✓' : (overdue ? '!' : (f.status === 'active' ? '●' : '○'));
+            const remCls = f.reminder === 'auto_email' ? 'auto' : 'due';
+            const remLabel = f.reminder === 'auto_email' ? '🤖 AUTO-EMAIL' : (f.reminder ? '🔔 НАПОМНИТЬ МНЕ' : '');
+            return `<div class="stage-item ${statusCls}" data-fu-id="${f.id}">
+              <div class="marker">${marker}</div>
+              <div class="body">
+                <div class="nm">${escapeHtml(f.name)}</div>
+                <div class="meta">
+                  <b>${fmtDateShort(f.due)}</b>
+                  ${overdue ? ' · ПРОСРОЧЕНО' : (f.status === 'active' ? ' · АКТИВНО' : (f.status === 'done' ? ' · ВЫПОЛНЕНО' : ' · ЗАПЛАНИРОВАНО'))}
+                  ${remLabel ? ' · ' + remLabel : ''}
+                </div>
+                ${f.notes ? `<div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">${escapeHtml(f.notes)}</div>` : ''}
+              </div>
+              <div class="actions">
+                ${f.status !== 'done' ? `<button title="Отметить выполненным" data-fu-action="done" data-fu-id="${f.id}" data-lead-id="${lead.id}">✓</button>` : ''}
+                <button title="Редактировать" data-fu-action="edit" data-fu-id="${f.id}" data-lead-id="${lead.id}">✏</button>
+                <button title="Удалить" data-fu-action="delete" data-fu-id="${f.id}" data-lead-id="${lead.id}">🗑</button>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    ` : '';
+
+    // Composer
+    const composerHtml = `
+      <div class="composer">
+        <div class="composer-tabs" data-lead-id="${lead.id}">
+          <span class="ct active" data-comp-mode="comment">💬 Комментарий</span>
+          <span class="ct" data-comp-mode="task">📋 Задача</span>
+          <span class="ct" data-comp-mode="reminder">🔔 Напоминание</span>
+          <span class="ct" data-comp-mode="file">📎 Файл</span>
+        </div>
+        <textarea id="comp-input" placeholder="Что записать?"></textarea>
+        <div class="composer-meta" id="comp-meta-task">
+          <label>Срок:</label>
+          <input type="date" id="comp-task-due">
+          <label>Кому:</label>
+          <select id="comp-task-assignee"><option value="me">Мне (Кирилл)</option><option>Иван Кравченко</option><option>Алексей Петров</option></select>
+        </div>
+        <div class="composer-meta" id="comp-meta-reminder">
+          <label>Когда:</label>
+          <input type="date" id="comp-rem-when">
+          <label>Тип:</label>
+          <select id="comp-rem-type">
+            <option value="manager">Напомнить мне</option>
+            <option value="auto_email">Auto-email клиенту</option>
+            <option value="ai">AI-подсказка перед звонком</option>
+          </select>
+        </div>
+        <div class="composer-meta" id="comp-meta-file">
+          <label>Файл:</label>
+          <input type="text" id="comp-file-name" placeholder="напр. КП_StarsCoffee_v3.pdf" style="flex:1;max-width:340px;">
+          <label>Тип:</label>
+          <select id="comp-file-type">
+            <option>КП</option><option>Презентация</option><option>Договор</option><option>Фото</option><option>Другое</option>
+          </select>
+        </div>
+        <div class="composer-foot">
+          <div class="left">
+            <button title="Прикрепить" data-comp-quick="file">📎</button>
+            <button title="@упомянуть">@</button>
+            <button title="🤖 AI-черновик" data-comp-quick="ai">🤖 AI</button>
+          </div>
+          <button class="send" id="comp-send" data-lead-id="${lead.id}">Добавить ↗</button>
+        </div>
+      </div>
+    `;
+
+    // Filter chips
+    const filterChips = `
+      <div class="feed-h">
+        <span class="filter-chip ${filter === 'all' ? 'active' : ''}" data-feed-filter="all">Все ${acts.length}</span>
+        <span class="filter-chip ${filter === 'comment' ? 'active' : ''}" data-feed-filter="comment">💬 Комментарии</span>
+        <span class="filter-chip ${filter === 'task' ? 'active' : ''}" data-feed-filter="task">📋 Задачи</span>
+        <span class="filter-chip ${filter === 'reminder' ? 'active' : ''}" data-feed-filter="reminder">🔔 Напоминания</span>
+        <span class="filter-chip ${filter === 'file' ? 'active' : ''}" data-feed-filter="file">📎 Файлы</span>
+        <span class="filter-chip ${filter === 'system' ? 'active' : ''}" data-feed-filter="system">⚙ Системные</span>
+      </div>
+    `;
+
+    // Activity items
+    const filteredActs = filter === 'all' ? acts : acts.filter(a => a.type === filter);
+    const itemsHtml = filteredActs.length ? filteredActs.map(a => {
+      const cls = a.type;
+      const ico = a.type === 'comment' ? '💬'
+                : a.type === 'task' ? (a.done ? '✓' : '📋')
+                : a.type === 'reminder' ? '🔔'
+                : a.type === 'file' ? '📎'
+                : a.type === 'email' ? '📧'
+                : a.type === 'tg' ? '💙'
+                : '⚙';
+      const time = fmtTimeAgo(a.ts);
+      let body = '';
+      if (a.type === 'comment') {
+        body = `<div class="head"><b>${escapeHtml(a.author || 'Кирилл')}</b> добавил комментарий <span>· ${time}</span></div>
+                <div class="content">${escapeHtml(a.text || '')}</div>`;
+      } else if (a.type === 'task') {
+        const overdue = !a.done && a.due_at && a.due_at < Date.now();
+        const badge = a.done ? '<span class="badge done">DONE</span>' : (overdue ? '<span class="badge overdue">ПРОСРОЧЕНО</span>' : '<span class="badge due">DUE</span>');
+        body = `<div class="head"><b>${escapeHtml(a.author || 'Кирилл')}</b> создал задачу ${badge} <span>· ${time}</span></div>
+                <div class="task-title ${a.done ? 'done' : ''}">${escapeHtml(a.title || '')}</div>
+                <div class="task-meta">
+                  ${a.due_at ? `📅 ${fmtDateShort(a.due_at)}` : ''}
+                  ${a.assignee ? ` · 👤 ${escapeHtml(a.assignee)}` : ''}
+                </div>
+                ${a.notes ? `<div class="content">${escapeHtml(a.notes)}</div>` : ''}`;
+      } else if (a.type === 'reminder') {
+        body = `<div class="head"><b>${escapeHtml(a.author || 'Кирилл')}</b> создал напоминание <span class="badge auto">${a.kind === 'auto_email' ? 'AUTO-EMAIL' : 'НАПОМНИТЬ'}</span> <span>· ${time}</span></div>
+                <div class="content"><b>${escapeHtml(a.title || '')}</b></div>
+                <div class="task-meta">📅 сработает ${fmtDateShort(a.trigger_at)}</div>`;
+      } else if (a.type === 'file') {
+        body = `<div class="head"><b>${escapeHtml(a.author || 'Кирилл')}</b> прикрепил файл <span>· ${time}</span></div>
+                <div class="content">${escapeHtml(a.note || '')}</div>
+                <div class="file-attach">
+                  <span style="font-size:18px;">📄</span>
+                  <span><span class="filename">${escapeHtml(a.filename || '')}</span>${a.kind ? ` · <span style="color:var(--text-secondary);">${escapeHtml(a.kind)}</span>` : ''}</span>
+                  <span class="filesize">${a.size || ''}</span>
+                  <a>скачать ↓</a>
+                </div>`;
+      } else if (a.type === 'email' || a.type === 'tg') {
+        body = `<div class="head"><b>${escapeHtml(a.author || 'Система')}</b> ${a.direction === 'out' ? 'отправил' : 'получил'} ${a.type === 'email' ? 'email' : 'TG-сообщение'} <span>· ${time}</span></div>
+                <div class="content">${escapeHtml(a.text || '')}</div>`;
+      } else {
+        body = `<div class="head"><b>Система</b> <span>· ${time}</span></div>
+                <div class="content">${a.text || ''}</div>`;
+      }
+      return `<div class="activity-item ${cls} ${a.done ? 'done' : ''}" data-act-id="${a.id}">
+        <div class="ico">${ico}</div>
+        <div class="body">${body}</div>
+        <div class="item-actions">
+          ${a.type === 'task' && !a.done ? `<button title="Отметить выполненным" data-act-action="done" data-act-id="${a.id}" data-lead-id="${lead.id}">✓</button>` : ''}
+          <button title="Удалить" data-act-action="delete" data-act-id="${a.id}" data-lead-id="${lead.id}">🗑</button>
+        </div>
+      </div>`;
+    }).join('') : '<div style="padding:40px;text-align:center;color:var(--text-secondary);font-size:14px;">Пока ничего · добавь первый комментарий, задачу или напоминание</div>';
+
+    panel.innerHTML = `
+      <div class="feed-shell">
+        ${fusHtml}
+        ${composerHtml}
+        ${filterChips}
+        <div class="feed">${itemsHtml}</div>
+      </div>
+    `;
+  }
+
+  // ========== Event handlers for composer + filters + actions ==========
+  document.addEventListener('click', e => {
+    // Composer mode tabs
+    const ct = e.target.closest('.composer-tabs .ct');
+    if (ct) {
+      const wrapper = ct.parentElement;
+      wrapper.querySelectorAll('.ct').forEach(x => x.classList.toggle('active', x === ct));
+      const mode = ct.dataset.compMode;
+      ['task', 'reminder', 'file'].forEach(m => {
+        const el = document.getElementById('comp-meta-' + m);
+        if (el) el.classList.toggle('show', m === mode);
+      });
+      const ta = document.getElementById('comp-input');
+      if (ta) ta.placeholder = {
+        'comment': 'Что обсудили / что важно зафиксировать?',
+        'task': 'Описание задачи (что нужно сделать)…',
+        'reminder': 'О чём напомнить?',
+        'file': 'Комментарий к файлу (опционально)…',
+      }[mode] || 'Что записать?';
+      return;
+    }
+    // Composer send
+    const sendBtn = e.target.closest('#comp-send');
+    if (sendBtn) {
+      const leadId = sendBtn.dataset.leadId;
+      const lead = window.LEADS_BY_ID && window.LEADS_BY_ID[leadId];
+      if (!lead) return;
+      const activeTab = document.querySelector('.composer-tabs .ct.active');
+      const mode = activeTab ? activeTab.dataset.compMode : 'comment';
+      const text = (document.getElementById('comp-input').value || '').trim();
+      const newAct = { id: 'a-' + Math.random().toString(36).slice(2), ts: Date.now(), author: 'Кирилл Перов' };
+      if (mode === 'comment') {
+        if (!text) { showToast('⚠ Текст пустой', 1800); return; }
+        newAct.type = 'comment'; newAct.text = text;
+      } else if (mode === 'task') {
+        if (!text) { showToast('⚠ Опиши задачу', 1800); return; }
+        newAct.type = 'task'; newAct.title = text;
+        const due = document.getElementById('comp-task-due').value;
+        if (due) newAct.due_at = new Date(due).getTime();
+        const assignee = document.getElementById('comp-task-assignee').value;
+        newAct.assignee = assignee === 'me' ? 'Кирилл Перов' : assignee;
+      } else if (mode === 'reminder') {
+        if (!text) { showToast('⚠ Опиши напоминание', 1800); return; }
+        newAct.type = 'reminder'; newAct.title = text;
+        const when = document.getElementById('comp-rem-when').value;
+        newAct.trigger_at = when ? new Date(when).getTime() : Date.now() + 86400000;
+        newAct.kind = document.getElementById('comp-rem-type').value;
+      } else if (mode === 'file') {
+        const filename = document.getElementById('comp-file-name').value.trim() || 'attachment.pdf';
+        newAct.type = 'file'; newAct.filename = filename;
+        newAct.kind = document.getElementById('comp-file-type').value;
+        newAct.size = '~1.2 MB';
+        newAct.note = text;
+        // КП также пушит system event
+        if (newAct.kind === 'КП') {
+          lead._activity = lead._activity || [];
+          lead._activity.push({
+            id: 's-' + Math.random().toString(36).slice(2), type: 'system', ts: Date.now(),
+            text: `📑 КП "${escapeHtml(filename)}" сформировано и прикреплено к карточке`
+          });
+        }
+      }
+      lead._activity = lead._activity || [];
+      lead._activity.push(newAct);
+      showToast('✓ Добавлено в ленту', 2000);
+      renderActivityFeed(lead);
+      return;
+    }
+    // Filter chips
+    const fc = e.target.closest('[data-feed-filter]');
+    if (fc) {
+      const panel = document.getElementById('activity-panel');
+      panel.dataset.filter = fc.dataset.feedFilter;
+      const lead = window._currentLead;
+      if (lead) renderActivityFeed(lead);
+      return;
+    }
+    // Activity action: done/delete
+    const actBtn = e.target.closest('[data-act-action]');
+    if (actBtn) {
+      const leadId = actBtn.dataset.leadId;
+      const actId = actBtn.dataset.actId;
+      const lead = window.LEADS_BY_ID && window.LEADS_BY_ID[leadId];
+      if (!lead || !lead._activity) return;
+      const item = lead._activity.find(x => x.id === actId);
+      if (!item) return;
+      if (actBtn.dataset.actAction === 'done') {
+        item.done = true;
+        showToast('✓ Задача закрыта', 1600);
+      } else if (actBtn.dataset.actAction === 'delete') {
+        lead._activity = lead._activity.filter(x => x.id !== actId);
+        showToast('🗑 Удалено', 1400);
+      }
+      renderActivityFeed(lead);
+      return;
+    }
+    // Follow-up actions
+    const fuBtn = e.target.closest('[data-fu-action]');
+    if (fuBtn) {
+      const leadId = fuBtn.dataset.leadId;
+      const fuId = fuBtn.dataset.fuId;
+      const lead = window.LEADS_BY_ID && window.LEADS_BY_ID[leadId];
+      if (!lead || !lead._followups) return;
+      const fu = lead._followups.find(x => x.id === fuId);
+      if (!fu) return;
+      if (fuBtn.dataset.fuAction === 'done') {
+        fu.status = 'done';
+        // Activate next pending
+        const idx = lead._followups.indexOf(fu);
+        for (let i = idx + 1; i < lead._followups.length; i++) {
+          if (lead._followups[i].status === 'pending') { lead._followups[i].status = 'active'; break; }
+        }
+        // Push system activity
+        lead._activity = lead._activity || [];
+        lead._activity.push({
+          id: 's-' + Math.random().toString(36).slice(2), type: 'system', ts: Date.now(),
+          text: `🔄 Этап «<b>${escapeHtml(fu.name)}</b>» отмечен выполненным`
+        });
+        showToast('✓ Этап выполнен', 1800);
+      } else if (fuBtn.dataset.fuAction === 'delete') {
+        lead._followups = lead._followups.filter(x => x.id !== fuId);
+        showToast('🗑 Этап удалён', 1400);
+      } else if (fuBtn.dataset.fuAction === 'edit') {
+        const newName = prompt('Название этапа:', fu.name);
+        if (newName) fu.name = newName.trim();
+      }
+      renderActivityFeed(lead);
+      return;
+    }
+    // Add stage
+    const addStage = e.target.closest('[data-add-stage]');
+    if (addStage) {
+      const leadId = addStage.dataset.addStage;
+      const lead = window.LEADS_BY_ID && window.LEADS_BY_ID[leadId];
+      if (!lead) return;
+      const name = prompt('Название этапа:', 'Новый этап');
+      if (!name) return;
+      lead._followups = lead._followups || [];
+      lead._followups.push({
+        id: 'fu-' + Math.random().toString(36).slice(2),
+        name: name.trim(),
+        due: Date.now() + 7 * 86400000,
+        status: 'pending',
+        reminder: 'manager',
+      });
+      renderActivityFeed(lead);
+      showToast('+ Этап добавлен', 1800);
+    }
+    // Quick file attach (composer)
+    const quickFile = e.target.closest('[data-comp-quick="file"]');
+    if (quickFile) {
+      const fileTab = document.querySelector('.composer-tabs .ct[data-comp-mode="file"]');
+      if (fileTab) fileTab.click();
+    }
+    const quickAi = e.target.closest('[data-comp-quick="ai"]');
+    if (quickAi) {
+      const ta = document.getElementById('comp-input');
+      if (ta && window._currentLead) {
+        ta.value = `🤖 AI-черновик: На основе AI Brief (fit ${window._currentLead.fit_score}/10) — связаться с ЛПР, упомянуть свежий sales trigger, предложить демо в течение недели.`;
+      }
+    }
+  });
+
   function updateTabsForLead(lead) {
     // Reset Inbox/Activities to a generic note (since we don't have real history per lead)
     const inboxPanel = document.querySelector('[data-panel="inbox"]');
@@ -7406,15 +8098,7 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
       </div>`;
     }
 
-    const actPanel = document.querySelector('[data-panel="activities"]');
-    if (actPanel && lead.id !== 'stars-coffee') {
-      const ago = lead.created_days_ago;
-      actPanel.innerHTML = `<div class="timeline">
-        <div class="tl-item"><div class="when">${lead.last_activity_days_ago}д назад</div><div>🔄 Перешёл в стадию <b>${lead.stage}</b></div></div>
-        <div class="tl-item"><div class="when">${Math.floor(ago/2)}д назад</div><div>🤖 AI обогащение: fit_score ${lead.fit_score}/10, добавлено ${(lead.linkedin_contacts.length||lead.decision_makers.length)} ЛПР</div></div>
-        <div class="tl-item"><div class="when">${ago}д назад</div><div>➕ Лид создан · из ${lead.tier === 'Tier 1' ? 'priority A списка' : 'research'}</div></div>
-      </div>`;
-    }
+    // Activity panel — rendered dynamically in renderActivityFeed (called from renderLeadCard)
   }
 
   // ========== TODAY screen ==========
