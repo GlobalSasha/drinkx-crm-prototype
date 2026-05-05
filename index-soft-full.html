@@ -1975,23 +1975,49 @@
     background: transparent;
     border-bottom: 1px solid var(--border);
     padding: 14px 36px;
+    display: flex; flex-direction: column; gap: 8px;
   }
-  .pipe-filters .seg-chip {
-    border-radius: 999px;
-    padding: 6px 14px;
+  .pipe-filters .filter-row {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  }
+  .pipe-filters .filter-label {
     font-family: var(--mono); font-size: 10px;
-    text-transform: uppercase; letter-spacing: 0.12em;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--text-tertiary); font-weight: 500;
+    min-width: 60px;
+  }
+  .pipe-filters .seg-chip,
+  .pipe-filters .city-chip {
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-family: var(--sans); font-size: 12px;
     font-weight: 500; background: rgba(10,10,10,0.04);
+    border: 1px solid var(--border);
+    cursor: pointer; user-select: none;
+    transition: all 600ms var(--ease);
   }
-  .pipe-filters .seg-chip.active {
-    background: var(--accent); color: #FFF;
+  .pipe-filters .seg-chip b,
+  .pipe-filters .city-chip b {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--text-tertiary); margin-left: 4px; font-weight: 600;
   }
+  .pipe-filters .seg-chip.active,
+  .pipe-filters .city-chip.active {
+    background: var(--accent); color: #FFF; border-color: var(--accent);
+  }
+  .pipe-filters .seg-chip.active b,
+  .pipe-filters .city-chip.active b { color: rgba(255,255,255,0.7); }
   .pipe-filters .search-leads {
     background: rgba(255,255,255,0.55);
     border: 1px solid var(--border);
     border-radius: 999px;
     padding: 8px 16px;
     box-shadow: var(--hairline-inset);
+    max-width: 320px;
+    align-self: flex-start;
+  }
+  .pipe-filters .stat-tag {
+    margin-left: auto; align-self: flex-end;
   }
 
   /* AI banner */
@@ -6502,7 +6528,12 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     // Re-render everything
     if (typeof renderPipelineBoard === 'function') {
       const segChip = document.querySelector('.pipe-filters .seg-chip.active');
-      renderPipelineBoard(segChip ? segChip.dataset.seg : 'all', document.getElementById('lead-search')?.value || '');
+      const cityChip = document.querySelector('.pipe-filters .city-chip.active');
+      renderPipelineBoard(
+        segChip ? segChip.dataset.seg : 'all',
+        document.getElementById('lead-search')?.value || '',
+        cityChip ? cityChip.dataset.city : 'all'
+      );
       // Update segment chip counts in-place
       const SHORT_LABELS = { food_retail:'ритейл', non_food_retail:'non-food', coffee_shops:'кофейня', qsr_fast_food:'QSR', gas_stations:'АЗС', coffee_equipment_distributors:'дистр' };
       document.querySelectorAll('.pipe-filters .seg-chip[data-seg]').forEach(chip => {
@@ -6821,12 +6852,14 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     </div>`;
   }
 
-  function renderPipelineBoard(segFilter, query) {
+  function renderPipelineBoard(segFilter, query, cityFilter) {
     const board = document.querySelector('#screen-pipeline .board');
     if (!board) return;
     const D = window.REAL_DATA;
+    cityFilter = cityFilter || 'all';
     const filtered = D.leads.filter(l => {
       if (segFilter !== 'all' && l.segment !== segFilter) return false;
+      if (cityFilter !== 'all' && !leadCities(l).includes(cityFilter)) return false;
       if (query) {
         const q = query.toLowerCase();
         if (!l.company_name.toLowerCase().includes(q) &&
@@ -6872,36 +6905,80 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     }
   }
 
+  // City extraction
+  const COMMON_CITIES = [
+    'Москва','Санкт-Петербург','Питер','СПб','Екатеринбург','Новосибирск','Казань',
+    'Нижний Новгород','Самара','Ростов-на-Дону','Уфа','Челябинск','Краснодар','Воронеж',
+    'Пермь','Волгоград','Тюмень','Тольятти','Омск','Иркутск','Сочи','Красноярск',
+    'Ярославль','Ижевск','Барнаул','Владивосток','Хабаровск','Калининград','Тула','Рязань'
+  ];
+  const CITY_NORMALIZE = { 'Питер': 'СПб', 'Санкт-Петербург': 'СПб' };
+  function extractCities(lead) {
+    const text = [lead.geography || '', lead.network_scale || '', lead.company_overview || '', lead.company_name || ''].join(' ');
+    const found = new Set();
+    COMMON_CITIES.forEach(c => {
+      const re = new RegExp('\\b' + c.replace(/[-]/g, '[- ]?') + '\\b', 'i');
+      if (re.test(text)) found.add(CITY_NORMALIZE[c] || c);
+    });
+    return Array.from(found);
+  }
+  function leadCities(lead) {
+    if (!lead._cities) lead._cities = extractCities(lead);
+    return lead._cities;
+  }
+
   function renderPipelineFilters() {
     const top = document.querySelector('#screen-pipeline .pipe-top');
     if (!top || top.dataset.filtersInit) return;
     top.dataset.filtersInit = '1';
 
-    // Insert filter row after pipe-top
     const filters = document.createElement('div');
     filters.className = 'pipe-filters';
     const D = window.REAL_DATA;
     const segs = Object.keys(D.segment_labels);
 
+    // Compute top cities
+    const cityCount = {};
+    D.leads.forEach(l => leadCities(l).forEach(c => cityCount[c] = (cityCount[c] || 0) + 1));
+    const topCities = Object.entries(cityCount).sort((a, b) => b[1] - a[1]).slice(0, 12);
+
     filters.innerHTML = `
-      <input class="search-leads" id="lead-search" placeholder="🔍 Поиск по 131 компании…">
-      <span class="seg-chip active" data-seg="all">Все</span>
-      ${segs.map(s => `<span class="seg-chip" data-seg="${s}">${SHORT_SEG[s] || s} ${D.stats.by_segment[s] || 0}</span>`).join('')}
+      <input class="search-leads" id="lead-search" placeholder="🔍 Поиск по ${D.leads.length} компаниям…">
+      <div class="filter-row">
+        <span class="filter-label">сегмент:</span>
+        <span class="seg-chip active" data-seg="all">все</span>
+        ${segs.map(s => `<span class="seg-chip" data-seg="${s}">${SHORT_SEG[s] || s} <b>${D.stats.by_segment[s] || 0}</b></span>`).join('')}
+      </div>
+      <div class="filter-row" id="city-filter-row">
+        <span class="filter-label">город:</span>
+        <span class="city-chip active" data-city="all">все</span>
+        ${topCities.map(([c, n]) => `<span class="city-chip" data-city="${escapeHtml(c)}">${escapeHtml(c)} <b>${n}</b></span>`).join('')}
+      </div>
       <span class="stat-tag">Tier 1: <b id="tier1-stat">${D.stats.by_tier['Tier 1'] || 0}</b> · Rotting: <b id="rot-stat">${D.stats.rotting}</b></span>
     `;
     top.after(filters);
 
     let currentSeg = 'all';
+    let currentCity = 'all';
     filters.addEventListener('click', e => {
-      const c = e.target.closest('.seg-chip');
-      if (!c) return;
-      filters.querySelectorAll('.seg-chip').forEach(x => x.classList.toggle('active', x === c));
-      currentSeg = c.dataset.seg;
-      renderPipelineBoard(currentSeg, document.getElementById('lead-search').value);
+      const seg = e.target.closest('.seg-chip');
+      if (seg) {
+        filters.querySelectorAll('.seg-chip').forEach(x => x.classList.toggle('active', x === seg));
+        currentSeg = seg.dataset.seg;
+        renderPipelineBoard(currentSeg, document.getElementById('lead-search').value, currentCity);
+        return;
+      }
+      const city = e.target.closest('.city-chip');
+      if (city) {
+        filters.querySelectorAll('.city-chip').forEach(x => x.classList.toggle('active', x === city));
+        currentCity = city.dataset.city;
+        renderPipelineBoard(currentSeg, document.getElementById('lead-search').value, currentCity);
+        return;
+      }
     });
 
     document.getElementById('lead-search').addEventListener('input', e => {
-      renderPipelineBoard(currentSeg, e.target.value);
+      renderPipelineBoard(currentSeg, e.target.value, currentCity);
     });
   }
 
