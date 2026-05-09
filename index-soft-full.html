@@ -2824,21 +2824,32 @@
 
   /* ============ BRIEF DRAWER (Pipeline) ============ */
   .brief-drawer {
-    position: fixed; top: 0; right: -540px; bottom: 0; width: 540px; max-width: 96vw;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: saturate(160%) blur(28px);
-    -webkit-backdrop-filter: saturate(160%) blur(28px);
-    border-left: 1px solid var(--border);
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -48%) scale(0.96);
+    width: 520px; max-width: 88vw; max-height: 82vh;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: saturate(180%) blur(32px);
+    -webkit-backdrop-filter: saturate(180%) blur(32px);
+    border: 1px solid var(--border);
+    border-radius: 22px;
     display: flex; flex-direction: column; z-index: 240;
-    transition: right 350ms var(--ease);
-    box-shadow: -10px 0 40px -10px rgba(10,10,10,0.18);
+    transition: transform 300ms var(--ease), opacity 300ms var(--ease);
+    box-shadow: 0 32px 80px -10px rgba(10,10,10,0.28), 0 0 0 1px rgba(255,255,255,0.6) inset;
     overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
-  .brief-drawer.open { right: 0; }
+  .brief-drawer.open {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
   .brief-overlay {
-    position: fixed; inset: 0; background: rgba(10,10,10,0.18); z-index: 235;
+    position: fixed; inset: 0; background: rgba(10,10,10,0.28); z-index: 235;
     display: none;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
   .brief-overlay.open { display: block; }
 
