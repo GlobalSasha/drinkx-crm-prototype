@@ -117,11 +117,26 @@
   }
   .side .pipe-link:hover { color: var(--accent); }
   .side .me {
-    margin: auto 12px 0; padding: 14px 16px; font-size: 11px;
-    color: var(--text-secondary); border-top: 1px solid var(--border);
-    font-family: var(--mono);
+    margin: auto 0 0;
+    padding: 14px 16px;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+    transition: background 150ms ease;
   }
-  .side .me b { color: var(--text-primary); font-family: var(--sans); font-weight: 700; font-size: 13px; display: block; margin-bottom: 2px; }
+  .side .me:hover { background: rgba(127,127,127,0.06); }
+  .side .me b { color: var(--text-primary); font-family: var(--sans); font-weight: 700; font-size: 13px; display: block; margin-bottom: 1px; }
+  .side .me-av {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    background-size: cover; background-position: center;
+  }
+  .side .me-info { flex: 1; min-width: 0; font-family: var(--mono); font-size: 11px; color: var(--text-secondary); }
+  .side .me-info span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .side .me-edit { font-size: 14px; color: var(--text-tertiary); opacity: 0; transition: opacity 150ms; flex-shrink: 0; }
+  .side .me:hover .me-edit { opacity: 1; }
 
   /* MAIN */
   .main { display: flex; flex-direction: column; background: var(--bg-primary); }
@@ -2976,7 +2991,15 @@
     <div class="pipe-link">• Повторные продажи</div>
     <div class="pipe-link">• Партнёры</div>
 
-    <div class="me">👤 Кирилл Перов<br>Менеджер</div>
+    <div class="me" data-go="profile" title="Редактировать профиль">
+      <div class="me-av" id="side-av">КП</div>
+      <div class="me-info">
+        <b id="side-name">Кирилл Перов</b>
+        <span id="side-role">Менеджер</span>
+        <span id="side-email" style="font-size:10px;opacity:.6;">kirill@drinkx.ru</span>
+      </div>
+      <span class="me-edit">✎</span>
+    </div>
   </aside>
 
   <!-- ============ MAIN ============ -->
@@ -4811,13 +4834,23 @@
                 <div class="pic-actions">📷 загрузить</div>
               </div>
               <div class="profile-fields">
-                <div class="field-row">
-                  <label>Имя</label>
-                  <input value="Кирилл Перов">
+                <div class="field-grid">
+                  <div class="field-row">
+                    <label>Имя <span class="req">*</span></label>
+                    <input id="onb-firstname" placeholder="Кирилл" value="Кирилл">
+                  </div>
+                  <div class="field-row">
+                    <label>Фамилия <span class="req">*</span></label>
+                    <input id="onb-lastname" placeholder="Перов" value="Перов">
+                  </div>
                 </div>
                 <div class="field-row">
-                  <label>Email</label>
-                  <input value="kirill@drinkx.ru" disabled style="opacity:.6;">
+                  <label>Телефон / Telegram</label>
+                  <input id="onb-phone" placeholder="+7 900 000-00-00 или @username">
+                </div>
+                <div class="field-row">
+                  <label>Email <span style="font-size:10px;color:var(--text-tertiary);font-weight:400;">(из Google, нельзя менять)</span></label>
+                  <input id="onb-email" value="kirill@drinkx.ru" disabled style="opacity:.6;">
                 </div>
               </div>
             </div>
@@ -5619,6 +5652,79 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
     </div>
   </div>
 </div>
+
+<!-- ============ PROFILE SCREEN ============ -->
+<section class="screen" id="screen-profile">
+  <div class="screen-h" style="padding:22px 32px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <h1 style="font-size:20px;font-weight:700;">Мой профиль</h1>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:3px;">Персональные данные · настройки AI-приоритизации</div>
+    </div>
+    <button class="btn" data-go="today">← Назад</button>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;padding:28px 32px 60px;max-width:640px;">
+
+    <!-- Avatar + name -->
+    <div class="profile-row" style="margin-bottom:28px;">
+      <div>
+        <div class="pic" id="profile-av" style="width:72px;height:72px;font-size:22px;">КП</div>
+        <div class="pic-actions" id="profile-av-btn">📷 загрузить</div>
+        <input type="file" accept="image/*" id="profile-avatar-input" style="display:none;">
+      </div>
+      <div class="profile-fields">
+        <div class="field-grid">
+          <div class="field-row">
+            <label>Имя <span class="req">*</span></label>
+            <input id="p-firstname" value="Кирилл">
+          </div>
+          <div class="field-row">
+            <label>Фамилия <span class="req">*</span></label>
+            <input id="p-lastname" value="Перов">
+          </div>
+        </div>
+        <div class="field-row">
+          <label>Телефон / Telegram</label>
+          <input id="p-phone" placeholder="+7 900 000-00-00 или @username">
+        </div>
+        <div class="field-row">
+          <label>Email <span style="font-size:10px;color:var(--text-tertiary);font-weight:400;">(из Google, нельзя менять)</span></label>
+          <input value="kirill@drinkx.ru" disabled style="opacity:.6;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Role -->
+    <div class="field-row" style="margin-bottom:20px;">
+      <label>Роль</label>
+      <div class="role-buttons">
+        <div class="role-btn" data-role-val="junior"><div class="nm">Junior</div><small>до 1 года</small></div>
+        <div class="role-btn selected" data-role-val="middle"><div class="nm">Middle / Senior</div><small>1+ лет</small></div>
+        <div class="role-btn" data-role-val="head"><div class="nm">Head of Sales</div><small>видит команду</small></div>
+      </div>
+    </div>
+
+    <!-- Specialization -->
+    <div class="field-row" style="margin-bottom:24px;">
+      <label>Специализация <span class="hint">для приоритизации лидов от AI</span></label>
+      <div class="spec-chips">
+        <div class="spec-chip selected">HoReCa</div>
+        <div class="spec-chip selected">Ритейл</div>
+        <div class="spec-chip">QSR / Fast Food</div>
+        <div class="spec-chip">АЗС</div>
+        <div class="spec-chip">Офис / B2B</div>
+        <div class="spec-chip">Партнёры / франшиза</div>
+      </div>
+    </div>
+
+    <!-- Save button -->
+    <div style="display:flex;justify-content:flex-end;gap:10px;padding-top:16px;border-top:1px solid var(--border);">
+      <button class="btn" data-go="today">Отмена</button>
+      <button class="btn primary" id="profile-save-btn">Сохранить изменения</button>
+    </div>
+
+  </div>
+</section>
 
 <!-- ============ BRIEF DRAWER (Pipeline lead preview) ============ -->
 <div class="brief-overlay" id="brief-overlay"></div>
@@ -7065,11 +7171,22 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
       const isHead = btn.dataset.role === 'head';
       document.querySelectorAll('.head-only').forEach(el => el.style.display = isHead ? 'flex' : 'none');
       document.getElementById('role-extras').style.display = isHead ? 'flex' : 'none';
-      // Update sidebar profile
-      const me = document.querySelector('.side .me');
-      if (me) me.innerHTML = isHead
-        ? '👤 Алёна Соколова<br>Head of Sales'
-        : '👤 Кирилл Перов<br>Менеджер';
+      // Update sidebar profile (preserve structured .me DOM)
+      const sideAv = document.getElementById('side-av');
+      const sideName = document.getElementById('side-name');
+      const sideRole = document.getElementById('side-role');
+      const sideEmail = document.getElementById('side-email');
+      if (isHead) {
+        if (sideAv && !sideAv.style.backgroundImage) sideAv.textContent = 'АС';
+        if (sideName) sideName.textContent = 'Алёна Соколова';
+        if (sideRole) sideRole.textContent = 'Head of Sales';
+        if (sideEmail) sideEmail.textContent = 'alena@drinkx.ru';
+      } else {
+        if (sideAv && !sideAv.style.backgroundImage) sideAv.textContent = 'КП';
+        if (sideName) sideName.textContent = 'Кирилл Перов';
+        if (sideRole) sideRole.textContent = 'Менеджер';
+        if (sideEmail) sideEmail.textContent = 'kirill@drinkx.ru';
+      }
       if (isHead) show('team');
       else show('today');
       return;
@@ -8244,6 +8361,98 @@ Coffeemania,7705123456,Иван Петров,i.petrov@coffeemania.ru,+7495...,50
       stats[4].textContent = D.leads.filter(l => l.stage === 'Закрыто (won)').length;
     }
   }
+
+  // ============ PROFILE SCREEN ============
+
+  // Avatar upload — profile screen
+  document.getElementById('profile-av-btn')?.addEventListener('click', () => {
+    document.getElementById('profile-avatar-input').click();
+  });
+  document.getElementById('profile-avatar-input')?.addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const av = document.getElementById('profile-av');
+      av.textContent = '';
+      av.style.backgroundImage = `url(${e.target.result})`;
+      av.style.backgroundSize = 'cover';
+      av.style.backgroundPosition = 'center';
+      // Also update sidebar avatar
+      const sideAv = document.getElementById('side-av');
+      if (sideAv) {
+        sideAv.textContent = '';
+        sideAv.style.backgroundImage = `url(${e.target.result})`;
+        sideAv.style.backgroundSize = 'cover';
+        sideAv.style.backgroundPosition = 'center';
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // Avatar upload — onboarding screen
+  document.querySelector('.pic-actions')?.addEventListener('click', function() {
+    // Only for onboarding context (not profile screen which has its own handler)
+    if (this.id === 'profile-av-btn') return;
+    let inp = document.getElementById('onb-avatar-input');
+    if (!inp) {
+      inp = document.createElement('input');
+      inp.type = 'file'; inp.accept = 'image/*'; inp.id = 'onb-avatar-input';
+      inp.style.display = 'none';
+      document.body.appendChild(inp);
+      inp.addEventListener('change', function() {
+        const file = this.files[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+          const pic = document.querySelector('#screen-onb-2 .pic');
+          if (pic) { pic.textContent = ''; pic.style.backgroundImage = `url(${e.target.result})`; pic.style.backgroundSize = 'cover'; }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    inp.click();
+  });
+
+  // role-btn toggle in profile screen
+  document.querySelector('#screen-profile')?.addEventListener('click', e => {
+    const rb = e.target.closest('.role-btn');
+    if (rb) {
+      rb.closest('.role-buttons').querySelectorAll('.role-btn').forEach(b => b.classList.toggle('selected', b === rb));
+    }
+    const sc = e.target.closest('#screen-profile .spec-chip');
+    if (sc) sc.classList.toggle('selected');
+  });
+
+  // Save profile → update sidebar
+  document.getElementById('profile-save-btn')?.addEventListener('click', () => {
+    const first = document.getElementById('p-firstname')?.value.trim() || '';
+    const last = document.getElementById('p-lastname')?.value.trim() || '';
+    const fullName = [first, last].filter(Boolean).join(' ');
+    const initials = [first[0], last[0]].filter(Boolean).join('').toUpperCase();
+    const role = document.querySelector('#screen-profile .role-btn.selected .nm')?.textContent || 'Менеджер';
+
+    // Update sidebar
+    const sideAv = document.getElementById('side-av');
+    if (sideAv && !sideAv.style.backgroundImage) sideAv.textContent = initials;
+    const sideName = document.getElementById('side-name');
+    if (sideName) sideName.textContent = fullName;
+    const sideRole = document.getElementById('side-role');
+    if (sideRole) sideRole.textContent = role;
+
+    showToast('✓ Профиль обновлён', 2500);
+    show('today');
+  });
+
+  // First-login detection via localStorage
+  // If 'drinkx_profile_set' not in localStorage → show onboarding on load
+  // (demo: skip this check so devs can always see the main CRM)
+  // Uncomment to enable:
+  // if (!localStorage.getItem('drinkx_profile_set')) {
+  //   show('onb-1');
+  // }
+  // document.getElementById('profile-save-btn')?.addEventListener('click', () => {
+  //   localStorage.setItem('drinkx_profile_set', '1');
+  // }, { capture: true });
 
   // Initial
   const initial = location.hash.replace('#', '') || 'today';
